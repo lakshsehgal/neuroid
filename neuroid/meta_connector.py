@@ -87,9 +87,10 @@ class MetaConnector:
                 "cpm",
             ]
 
-        params = {
-            "level": "account",
-            "time_range": {"since": start_date, "until": end_date},
+        import json
+params = {
+    "level": "account",
+    "time_range": json.dumps({"since": start_date, "until": end_date}),
             "fields": ",".join(fields),
             "time_increment": time_increment,
         }
