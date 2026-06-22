@@ -1,0 +1,65 @@
+/* ============================================================
+   NEUROID — Color tokens (STRICT)
+   Black · Acid Yellow · Signal Red · White · two Greys.
+   NEVER introduce any other color. Structural tints (hairlines,
+   sunken fills) are alpha blends of these same colors only.
+   ============================================================ */
+:root {
+  /* ---- Brand core ---- */
+  --neuroid-ink:       #0C0C0C;  /* Black — dark pages, footer bars, fee blocks */
+  --neuroid-yellow:    #FEEF24;  /* Acid Yellow — hero accent: highlights, chips, cover panel, key figures */
+  --neuroid-red:       #FF2600;  /* Signal Red — sparing: headline full stops, one pixel square, micro-labels, the "/-" after prices */
+  --neuroid-paper:     #FFFFFF;  /* White — light page backgrounds */
+  --neuroid-grey:      #8A8A8A;  /* Grey — secondary body text on LIGHT pages */
+  --neuroid-grey-dark: #B5B5B5;  /* Grey — secondary body text on DARK pages */
+
+  /* ---- Legacy ramp aliases (mapped onto the strict palette + tints) ---- */
+  --gray-950: #0C0C0C;
+  --gray-900: #0C0C0C;
+  --gray-800: #0C0C0C;
+  --gray-700: #8A8A8A;
+  --gray-600: #8A8A8A;
+  --gray-500: #8A8A8A;
+  --gray-400: #B5B5B5;
+  --gray-300: #B5B5B5;
+  --gray-200: rgba(12, 12, 12, 0.14);  /* soft hairline on light */
+  --gray-100: rgba(12, 12, 12, 0.08);
+  --gray-050: rgba(12, 12, 12, 0.04);  /* sunken fill on light */
+
+  /* ---- Base aliases ---- */
+  --fg-1: var(--neuroid-ink);          /* primary text on light */
+  --fg-2: var(--neuroid-grey);         /* secondary text on light */
+  --fg-3: var(--neuroid-grey);
+  --fg-inv: var(--neuroid-paper);      /* primary text on dark */
+  --fg-inv-2: var(--neuroid-grey-dark);/* secondary text on dark */
+
+  /* ---- Semantic surfaces ---- */
+  --surface-page:    var(--neuroid-paper);
+  --surface-ink:     var(--neuroid-ink);   /* hero / inverted blocks */
+  --surface-card:    var(--neuroid-paper);
+  --surface-sunken:  var(--gray-050);
+  --surface-accent:  var(--neuroid-yellow);
+
+  /* ---- Semantic text ---- */
+  --text-strong:    var(--neuroid-ink);
+  --text-body:      var(--neuroid-ink);    /* primary body is black; grey is for SECONDARY text */
+  --text-muted:     var(--neuroid-grey);
+  --text-on-accent: var(--neuroid-ink);    /* black text on yellow */
+  --text-inverse:   var(--neuroid-paper);
+
+  /* ---- Lines & borders ---- */
+  --border-hard:   var(--neuroid-ink);            /* 1.5–2px brutalist rules */
+  --border-soft:   var(--gray-200);
+  --border-on-ink: rgba(255, 255, 255, 0.16);     /* hairlines on dark — white tint */
+
+  /* ---- Interactive / accent ---- */
+  --accent:          var(--neuroid-yellow);
+  --accent-press:    var(--neuroid-yellow);  /* press = motion, never a new color */
+  --accent-2:        var(--neuroid-red);
+  --accent-2-press:  var(--neuroid-red);
+  --focus-ring:      var(--neuroid-ink);     /* focus is ink, not red — red stays reserved */
+
+  /* ---- Status — only brand colors; no green/blue exists in this system ---- */
+  --warning: var(--neuroid-yellow);
+  --danger:  var(--neuroid-red);
+}

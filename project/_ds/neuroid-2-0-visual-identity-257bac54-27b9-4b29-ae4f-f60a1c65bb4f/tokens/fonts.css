@@ -1,0 +1,51 @@
+/* ============================================================
+   NEUROID — Webfont declarations
+   FH Lecturis (display/accent) · DM Sans (body) · PP Editorial New (serif)
+   ============================================================ */
+
+/* Accent / Display — FH Lecturis (Bold weight supplied) */
+@font-face {
+  font-family: "FH Lecturis";
+  src: url("../assets/fonts/FHLecturis-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Primary body — DM Sans (variable, optical size + weight) */
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/DMSans-Variable.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/DMSans-Italic-Variable.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-stretch: 75% 125%;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Secondary / Editorial serif — PP Editorial New (Italic file supplied).
+   Declared under BOTH normal and italic so `font-family:'PP Editorial New'`
+   always resolves to the real glyphs — without an explicit `font-style:italic`
+   it was falling back to Georgia (the "wrong on white" bug). The file's glyphs
+   are inherently italic; no faux-slant is applied in either case. */
+@font-face {
+  font-family: "PP Editorial New";
+  src: url("../assets/fonts/PPEditorialNew-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Editorial New";
+  src: url("../assets/fonts/PPEditorialNew-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/neuroid-2-0-visual-identity-257bac54-27b9-4b29-ae4f-f60a1c65bb4f/styles.css">
+<script src="_ds/neuroid-2-0-visual-identity-257bac54-27b9-4b29-ae4f-f60a1c65bb4f/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#F4F1EA;}
+  @keyframes nrd-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes nrd-marquee-rev{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+  @keyframes nrd-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @keyframes nrd-pop{0%{opacity:0;transform:scale(0.96);}100%{opacity:1;transform:scale(1);}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family:var(--font-sans);background:#F4F1EA;color:var(--neuroid-ink);overflow-x:hidden;">
+
+<!-- ============ NAV ============ -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(244,241,234,0.92);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1320px;margin:0 auto;padding:14px clamp(18px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="Neuroid Home.dc.html" style="display:flex;align-items:center;flex:none;text-decoration:none;">
+      <img src="assets/brand/neuroid-logo-black.svg" alt="Neuroid" style="height:40px;width:auto;display:block;">
+    </a>
+
+    <nav style="display:flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:600;font-size:14px;">
+      <sc-if value="{{ desktopNav }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <a href="Neuroid Home.dc.html" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">Home</a>
+          <a href="#work" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;border-bottom:2px solid var(--neuroid-ink);">Work</a>
+          <a href="Neuroid Home.dc.html#services" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">Services</a>
+          <a href="Neuroid Home.dc.html#about" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">About</a>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <sc-if value="{{ desktopNav }}" hint-placeholder-val="{{ true }}">
+          <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;"><x-import component-from-global-scope="NeuroidDesignSystem_257bac.Button" variant="primary" block="{{ true }}" size="sm" hint-size="auto,38px">Book a Growth Audit</x-import></a>
+        </sc-if>
+        <sc-if value="{{ mobileNav }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ toggleMobile }}" aria-label="Menu" style="background:none;border:1.5px solid var(--neuroid-ink);width:42px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0;">
+            <span style="width:18px;height:2px;background:var(--neuroid-ink);display:block;"></span>
+            <span style="width:18px;height:2px;background:var(--neuroid-ink);display:block;"></span>
+            <span style="width:18px;height:2px;background:var(--neuroid-ink);display:block;"></span>
+          </button>
+        </sc-if>
+      </div>
+    </nav>
+  </div>
+
+  <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1.5px solid var(--neuroid-ink);background:var(--neuroid-paper);padding:8px clamp(18px,4vw,56px) 18px;">
+      <a href="Neuroid Home.dc.html" onClick="{{ closeMobile }}" style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Home</a>
+      <a href="#work" onClick="{{ closeMobile }}" style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Work</a>
+      <a href="Neuroid Home.dc.html#services" onClick="{{ closeMobile }}" style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Services</a>
+      <a href="Neuroid Home.dc.html#about" onClick="{{ closeMobile }}" style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">About</a>
+      <div style="padding-top:14px;">
+        <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;"><x-import component-from-global-scope="NeuroidDesignSystem_257bac.Button" variant="primary" block="{{ true }}" full="{{ true }}" size="md" hint-size="100%,44px">Book a Growth Audit</x-import></a>
+      </div>
+    </div>
+  </sc-if>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" style="position:relative;background:radial-gradient(circle at center, rgba(12,12,12,0.07) 1.3px, transparent 1.9px) 0 0 / 22px 22px, #F4F1EA;padding:clamp(48px,7vw,96px) clamp(18px,4vw,56px) clamp(40px,5vw,64px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:26px;color:var(--neuroid-ink);">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);display:inline-block;flex:none;"></span>
+      <span>Portfolio - Selected creative</span>
+    </div>
+    <h1 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.98;font-size:clamp(2.7rem,7.2vw,6rem);margin:0;max-width:16ch;text-wrap:balance;">A wall of work that actually <span class="nrd-highlight" style="font-family:var(--font-serif);font-style:italic;font-weight:400;">performed</span><span style="display:inline-block;width:0.15em;height:0.15em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.04em;"></span></h1>
+    <p data-reveal style="font-size:clamp(1.05rem,1.6vw,1.32rem);line-height:1.5;max-width:600px;margin:30px 0 0;color:var(--neuroid-grey);">Hundreds of scroll-stopping creatives - performance video, UGC, social and ad films - built for D2C brands and shipped at a volume most studios can&rsquo;t touch. This is a slice.</p>
+  </div>
+</section>
+
+<!-- ============ STAT STRIP ============ -->
+<section style="border-bottom:1.5px solid var(--neuroid-ink);background:var(--neuroid-ink);color:var(--neuroid-paper);">
+  <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,180px),1fr));">{{ statCells }}</div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="work" style="padding:clamp(44px,6vw,80px) clamp(18px,4vw,56px) clamp(56px,8vw,104px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div data-reveal style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px;margin-bottom:clamp(26px,3.4vw,40px);">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-red);margin-bottom:16px;">
+          <span>/</span><span>The creative wall</span>
+        </div>
+        <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.02;font-size:clamp(1.7rem,3.4vw,2.8rem);margin:0;max-width:18ch;">Every tile shipped, tested &amp; <span class="nrd-highlight">scaled</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;"></span></h2>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--neuroid-grey);padding-bottom:6px;">{{ resultCount }}</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,15.5vw,210px),1fr));gap:clamp(12px,1.4vw,18px);">{{ galleryTiles }}</div>
+  </div>
+</section>
+
+<!-- ============ BRAND WALL ============ -->
+<section style="padding:clamp(48px,7vw,88px) 0;border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,56px);">
+    <div data-reveal style="display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-red);margin-bottom:18px;">
+      <span>/</span><span>Made for</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.5rem,3vw,2.4rem);margin:0 0 clamp(32px,4.5vw,52px);max-width:22ch;">The brands behind the work - <span style="font-family:var(--font-serif);font-style:italic;font-weight:400;">100+</span> and counting.</h2>
+  </div>
+  <div data-reveal style="display:flex;flex-direction:column;gap:16px;padding:0 clamp(18px,4vw,56px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);">
+    <div style="overflow:hidden;">{{ logoRowA }}</div>
+    <div style="overflow:hidden;">{{ logoRowB }}</div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="contact" style="position:relative;background:var(--neuroid-yellow);padding:clamp(64px,10vw,140px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(circle at center, rgba(12,12,12,0.08) 1.4px, transparent 2px);background-size:24px 24px;pointer-events:none;"></div>
+  <div data-reveal style="position:relative;max-width:1000px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.98;font-size:clamp(2.4rem,6.4vw,5.4rem);margin:0;text-wrap:balance;">Want work like <span style="font-family:var(--font-serif);font-style:italic;font-weight:400;">this</span>?<span style="display:inline-block;width:0.15em;height:0.15em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.04em;"></span></h2>
+    <p style="font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.5;max-width:660px;margin:26px auto 0;">A creative engine that ships volume and actually performs - plugged into the media that scales it.</p>
+    <div style="display:flex;justify-content:center;margin-top:38px;">
+      <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;"><x-import component-from-global-scope="NeuroidDesignSystem_257bac.Button" variant="inverse" block="{{ true }}" size="lg" hint-size="auto,56px">Book a Growth Audit</x-import></a>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;margin-top:30px;">New Delhi, India · hello@neuroidmedia.com</div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:var(--neuroid-ink);color:var(--neuroid-paper);padding:clamp(56px,7vw,88px) clamp(18px,4vw,56px) 40px;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;">
+      <div style="flex:1 1 320px;min-width:260px;">
+        <img src="assets/brand/neuroid-logo.svg" alt="Neuroid" style="height:30px;margin-bottom:20px;">
+        <p style="font-size:1.05rem;line-height:1.5;max-width:340px;margin:0;color:var(--neuroid-grey-dark);">An integrated growth &amp; creative studio for <span style="font-family:var(--font-serif);font-style:italic;color:#fff;">D2C brands</span>.</p>
+        <div class="nrd-pixels" style="margin-top:24px;"><i></i><i></i><i></i></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:48px;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Explore</div>
+          <a href="Neuroid Home.dc.html" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Home</a>
+          <a href="#work" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Work</a>
+          <a href="Neuroid Home.dc.html#services" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Services</a>
+          <a href="Neuroid Home.dc.html#about" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">About</a>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Connect</div>
+          <a href="https://instagram.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Instagram</a>
+          <a href="https://linkedin.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">LinkedIn</a>
+          <a href="mailto:hello@neuroidmedia.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Email</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.16);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--neuroid-grey-dark);">
+      <span>New Delhi, India · +91 6397-917-909</span>
+      <span>www.neuroidmedia.com</span>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">{{ lightbox }}</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { w: 1280, mobileMenu: false, lightbox: null };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+    this._onResize();
+    this._onKey = (e) => { if (e.key === 'Escape' && this.state.lightbox) this._close(); };
+    window.addEventListener('keydown', this._onKey);
+    requestAnimationFrame(() => this._initReveal());
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._safety);
+    if (this._io) this._io.disconnect();
+    if (this._visTimer) clearInterval(this._visTimer);
+  }
+
+  _open(it) { this.setState({ lightbox: it }); }
+  _close() { this.setState({ lightbox: null }); }
+
+  _lightbox() {
+    const it = this.state.lightbox;
+    if (!it) return undefined;
+    const INK = 'var(--neuroid-ink)', YEL = 'var(--neuroid-yellow)';
+    let media;
+    if (it.type === 'video') {
+      media = React.createElement('video', {
+        src: it.src.replace('w_480', 'w_900'), loop: true, controls: true, autoPlay: true, playsInline: true,
+        ref: (el) => { if (!el) return; el.muted = false; el.volume = 1; el.play().catch(() => { el.muted = true; el.play().catch(() => {}); }); },
+        style: { display: 'block', width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: 'min(86vh,820px)', aspectRatio: '9 / 16', objectFit: 'cover', background: INK }
+      });
+    } else {
+      media = React.createElement('img', {
+        src: it.src, alt: it.brand,
+        style: { display: 'block', width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: 'min(86vh,820px)', objectFit: 'contain', background: INK }
+      });
+    }
+    const closeBtn = React.createElement('button', {
+      type: 'button', 'aria-label': 'Close', onClick: () => this._close(),
+      style: { position: 'absolute', top: '-13px', right: '-13px', width: '42px', height: '42px', cursor: 'pointer', background: YEL, border: '1.5px solid ' + INK, boxShadow: '3px 3px 0 0 ' + INK, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, zIndex: 2 }
+    }, React.createElement('svg', { width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none' },
+      React.createElement('path', { d: 'M3 3l10 10M13 3L3 13', stroke: INK, strokeWidth: '2', strokeLinecap: 'square' })
+    ));
+    const caption = React.createElement('div', {
+      style: { position: 'absolute', left: 0, bottom: '-44px', display: 'flex', alignItems: 'center', gap: '10px' }
+    },
+      React.createElement('span', { style: { fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: INK, background: it.type === 'video' ? YEL : '#fff', border: '1px solid ' + INK, padding: '4px 8px', lineHeight: 1 } }, it.type === 'video' ? 'Video creative' : 'Still creative')
+    );
+    const frame = React.createElement('div', {
+      onClick: (e) => e.stopPropagation(),
+      style: { position: 'relative', border: '1.5px solid ' + INK, boxShadow: '0 18px 50px rgba(0,0,0,0.5)', lineHeight: 0, animation: 'nrd-pop .22s var(--ease-snap)' }
+    }, media, closeBtn, caption);
+    return React.createElement('div', {
+      onClick: () => this._close(),
+      style: { position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(8,8,8,0.86)', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(28px,5vw,72px) clamp(18px,4vw,56px)' }
+    }, frame);
+  }
+
+  _initReveal() {
+    const root = this._root;
+    if (!root) return;
+    const els = Array.from(root.querySelectorAll('[data-reveal]'));
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+    els.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)';
+    });
+    this._io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => { if (e.isIntersecting) { show(e.target); this._io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    els.forEach((el) => this._io.observe(el));
+    this._safety = setTimeout(() => els.forEach(show), 2400);
+  }
+
+  _registerVideo(el) {
+    if (!this._vids) this._vids = new Set();
+    this._vids.add(el);
+    if (!this._visTimer) {
+      const tick = () => {
+        const vh = window.innerHeight, vw = window.innerWidth;
+        this._vids.forEach((v) => {
+          if (!v.isConnected) { this._vids.delete(v); return; }
+          const r = v.getBoundingClientRect();
+          const on = r.bottom > -80 && r.top < vh + 80 && r.right > 0 && r.left < vw;
+          if (on) { if (v.paused) v.play().catch(() => {}); }
+          else if (!v.paused) v.pause();
+        });
+      };
+      this._visTimer = setInterval(tick, 450);
+      setTimeout(tick, 60);
+    }
+  }
+
+  _items() {
+    const CL = 'https://res.cloudinary.com/dbuklvo6b/video/upload/f_auto,q_auto,w_480/';
+    // [cloudPath, brand, category]
+    const V = [
+      ['v1782043217/UNO_Luxe_V2_lefbae', 'UNO Luxe', 'film'],
+      ['v1782042891/Yoho_Pitstop_H1_V2_3_jdlfvv', 'Yoho', 'perf'],
+      ['v1782042845/H1_CupJi_V1_3_nb1jzu', 'Cup Ji', 'ugc'],
+      ['v1782042844/PU_3___Hook_2_1_egyvbl', 'Period Underwear', 'ugc'],
+      ['v1782042843/9X16_V1_r2yjdc', 'Spirit Animal', 'perf'],
+      ['v1782042842/Karassa_UGC_2_2_w1avqf', 'Karassa', 'ugc'],
+      ['v1782042839/Svarn_Jewels_CC146_inm6hs', 'Svarn Jewels', 'perf'],
+      ['v1782042838/CC15_V3_ad3uqu', 'Jewelsmars', 'perf'],
+      ['v1782042836/CC60_FRECKLES_VIDEO_silix5', 'Freckles', 'ugc'],
+      ['v1782042833/Svarn_Jewels_CC140_wkdu2m', 'Svarn Jewels', 'social'],
+      ['v1782042831/CC33_PowerShift_Pants_video_jfrtn6', 'PowerShift', 'perf'],
+      ['v1782042826/Period_Underwear___Hook_2_oc2mad', 'Period Underwear', 'ugc'],
+      ['v1782042826/CC14_Girls_Leggings_V2_l7z8a6', 'Superbottoms', 'perf'],
+      ['v1782042820/CC14_1_smi6hm', 'Superbottoms', 'perf'],
+      ['v1782042817/9x16_V3_bscyvw', 'Lifelong', 'perf'],
+      ['v1782042816/CC5_Final_x5ejpn', 'Kisah', 'film'],
+      ['v1782042815/CC11_Understyling_your_eyes_npetnn', 'Huesfab', 'social'],
+      ['v1782042814/CC101_Bedtime_Supremacy_ptdoos', 'Silverfied', 'social'],
+      ['v1782042812/CC115_Bestseller_Rings_ajsz9s', 'Jewelsmars', 'perf'],
+      ['v1782042807/CC60_Silverfied_Screen_Freeze_Product_final_lmtvvo', 'Silverfied', 'social'],
+      ['v1782042806/CC67_Silverfied_Stack_you_forget_to_take_off_fkuonn', 'Silverfied', 'social'],
+      ['v1782042805/CC56_silvercied_Msgs_in_DM_Final_srazws', 'Silverfied', 'social'],
+      ['v1782042799/Sequence_01_1_f4rpm7', 'Wooden Street', 'film'],
+      ['v1782042791/CC27_Huesfab_All_collection_Final_vi2rjm', 'Huesfab', 'social'],
+      ['v1782042790/PU_02_May_H2.wav_1_lvicth', 'Period Underwear', 'ugc'],
+      ['v1782042780/CC12_ceratine_Final_svatid', 'Ceratine', 'perf'],
+      ['v1782042777/Polo_Gif_ybhdjd', 'Mackly', 'social'],
+      ['v1782042777/9x16_cova4q', 'Vaaree', 'perf'],
+      ['v1782042774/CC3___Hard_Launch_-_Short_Kurta_oxl7wu', 'Kisah', 'film']
+    ].map((r) => ({ type: 'video', src: CL + r[0] + '.mp4', brand: r[1], cat: r[2] }));
+
+    const statics = [
+      ['c01.png', 'Wooden Street'], ['c02.png', 'Jewelsmars'], ['c03.png', 'Lifelong'],
+      ['c04.png', 'Silverfied'], ['c05.png', 'Kisah'], ['c06.png', 'Yoho'],
+      ['c07.png', 'Superbottoms'], ['c08.png', 'Huesfab'], ['c09.png', 'Vaaree'],
+      ['c10.jpg', 'Mackly'], ['c11.jpg', 'Nourish You'], ['c12.jpg', 'Spirit Animal'],
+      ['c13.jpg', 'Awenest'], ['c14.jpg', 'Ghani Putri'], ['c15.jpg', 'Loving Crafts'],
+      ['c16.jpg', 'Chowkhat'], ['c17.jpg', 'Supersox'], ['c18.jpg', 'Vedansh'],
+      ['c19.jpg', 'Jaipuri Crown'], ['c20.jpg', 'Gataca'], ['c21.jpg', 'Truth & Hair'],
+      ['c22.png', 'Deep Impact'], ['c23.png', 'Evara'], ['c24.jpg', 'Wooden Street'],
+      ['c25.jpg', 'Jewelsmars'], ['c26.jpg', 'Lifelong']
+    ].map((r) => ({ type: 'img', src: 'assets/creatives/' + r[0], brand: r[1], cat: 'static' }));
+
+    // Interleave videos and statics for a lively, mixed wall
+    const out = [];
+    const n = Math.max(V.length, statics.length);
+    for (let i = 0; i < n; i++) {
+      if (i < V.length) out.push(V[i]);
+      if (i % 2 === 1 && (i >> 1) < statics.length) out.push(statics[i >> 1]);
+    }
+    // append remaining statics
+    statics.forEach((s, i) => { if (i % 2 === 0) out.push(s); });
+    return out;
+  }
+
+  _galleryTiles() {
+    const items = this._items();
+    const INK = 'var(--neuroid-ink)', YEL = 'var(--neuroid-yellow)';
+    return items.map((it, i) => {
+      let media;
+      if (it.type === 'video') {
+        media = React.createElement('video', {
+          src: it.src, loop: true, playsInline: true, preload: 'none',
+          ref: (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; this._registerVideo(el); },
+          style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', background: INK }
+        });
+      } else {
+        media = React.createElement('img', {
+          src: it.src, loading: 'lazy', alt: it.brand,
+          style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', background: 'rgba(12,12,12,0.05)' }
+        });
+      }
+      // hover overlay - "View" affordance, no brand attribution
+      const overlay = React.createElement('div', {
+        'data-ov': '',
+        style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: '13px', background: 'linear-gradient(to top, rgba(12,12,12,0.72) 0%, rgba(12,12,12,0.0) 52%)', opacity: 0, transition: 'opacity .22s ease', zIndex: 2, pointerEvents: 'none' }
+      },
+        React.createElement('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: '13px', letterSpacing: '-0.01em', color: '#fff' } }, 'View', React.createElement('span', { style: { fontSize: '15px', lineHeight: 1 } }, '\u2197'))
+      );
+      // small always-on type chip top-left
+      const chip = React.createElement('div', {
+        style: { position: 'absolute', top: '10px', left: '10px', zIndex: 3, fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: INK, background: it.type === 'video' ? YEL : '#fff', border: '1px solid ' + INK, padding: '3px 6px', lineHeight: 1, pointerEvents: 'none' }
+      }, it.type === 'video' ? 'Video' : 'Still');
+
+      return React.createElement('div', {
+        key: it.cat + '-' + i + '-' + it.src,
+        style: { position: 'relative', aspectRatio: '9 / 16', overflow: 'hidden', border: '1.5px solid ' + INK, background: INK, cursor: 'pointer', transition: 'transform .22s var(--ease-snap), box-shadow .22s var(--ease-snap)', boxShadow: '0 0 0 0 ' + YEL },
+        onClick: () => this._open(it),
+        onMouseEnter: (e) => { e.currentTarget.style.transform = 'translate(-3px,-3px)'; e.currentTarget.style.boxShadow = '7px 7px 0 0 ' + YEL; const ov = e.currentTarget.querySelector('[data-ov]'); if (ov) ov.style.opacity = '1'; },
+        onMouseLeave: (e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 0 0 0 ' + YEL; const ov = e.currentTarget.querySelector('[data-ov]'); if (ov) ov.style.opacity = '0'; }
+      }, media, chip, overlay);
+    });
+  }
+
+  _statCells() {
+    const stats = [
+      ['200+', 'Creatives / month'],
+      ['100+', 'D2C brands'],
+      ['7.5x', 'Peak ROAS'],
+      ['\u20B9450Cr+', 'Revenue influenced']
+    ];
+    return stats.map((s, i) => React.createElement('div', {
+      key: i,
+      style: { padding: 'clamp(22px,3vw,34px) clamp(18px,2.4vw,32px)', borderRight: '1px solid rgba(255,255,255,0.16)', borderBottom: '1px solid rgba(255,255,255,0.16)' }
+    },
+      React.createElement('div', { style: { fontFamily: 'var(--font-sans)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, fontSize: 'clamp(2rem,4vw,3.1rem)', color: 'var(--neuroid-yellow)' } }, s[0]),
+      React.createElement('div', { style: { fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--neuroid-grey-dark)', marginTop: '10px' } }, s[1])
+    ));
+  }
+
+  _logoRow(brands, reverse, dur) {
+    const cell = (b, i) => React.createElement('div', {
+      key: i,
+      style: { flex: 'none', width: '180px', height: '84px', marginRight: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 26px', border: '1px solid var(--neuroid-ink)', background: 'var(--neuroid-paper)', transition: 'background .22s var(--ease-snap), box-shadow .22s var(--ease-snap), transform .22s var(--ease-snap)' },
+      onMouseEnter: (e) => { e.currentTarget.style.background = 'var(--neuroid-yellow)'; e.currentTarget.style.boxShadow = '3px 3px 0 0 var(--neuroid-ink)'; e.currentTarget.style.transform = 'translate(-1px,-1px)'; const img = e.currentTarget.querySelector('img'); if (img) { img.style.filter = 'none'; img.style.opacity = '1'; } },
+      onMouseLeave: (e) => { e.currentTarget.style.background = 'var(--neuroid-paper)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none'; const img = e.currentTarget.querySelector('img'); if (img) { img.style.filter = 'grayscale(1)'; img.style.opacity = '0.82'; } }
+    }, React.createElement('img', {
+      src: 'assets/logos/' + b[1], alt: b[0], loading: 'lazy',
+      style: { maxWidth: '100%', maxHeight: '38px', width: 'auto', objectFit: 'contain', mixBlendMode: 'multiply', filter: 'grayscale(1)', opacity: 0.82, transition: 'filter .22s var(--ease-snap), opacity .22s var(--ease-snap)' }
+    }));
+    const set = (kp) => brands.map((b, i) => cell(b, kp + i));
+    return React.createElement('div', {
+      style: { display: 'flex', width: 'max-content', willChange: 'transform', animation: (reverse ? 'nrd-marquee-rev' : 'nrd-marquee') + ' ' + dur + ' linear infinite' }
+    }, [
+      React.createElement('div', { key: 'a', style: { display: 'flex', flex: 'none' } }, set('a')),
+      React.createElement('div', { key: 'b', style: { display: 'flex', flex: 'none' }, 'aria-hidden': 'true' }, set('b'))
+    ]);
+  }
+
+  renderVals() {
+    const w = this.state.w;
+    const desktopNav = w >= 920;
+    const total = this._items().length;
+    return {
+      rootRef: (el) => { this._root = el; },
+      desktopNav,
+      mobileNav: !desktopNav,
+      mobileMenuOpen: this.state.mobileMenu && !desktopNav,
+      toggleMobile: () => this.setState((s) => ({ mobileMenu: !s.mobileMenu })),
+      closeMobile: () => this.setState({ mobileMenu: false }),
+      resultCount: total + ' creatives',
+      statCells: this._statCells(),
+      galleryTiles: this._galleryTiles(),
+      lightboxOpen: !!this.state.lightbox,
+      lightbox: this._lightbox(),
+      logoRowA: this._logoRow([
+        ['Wooden Street', 'woodenstreet.png'], ['Lifelong', 'lifelong-k.png'], ['Jewelsmars', 'jewelsmars.png'], ['Silverfied', 'silverfied.png'],
+        ['Spirit Animal', 'spiritanimal.png'], ['Awenest', 'awenest.avif'], ['Truth & Hair', 'truthandhair.png'], ['Deep Impact', 'deepimpact.png'],
+        ['Superbottoms', 'superbottoms.avif'], ['Kisah', 'kisah.avif'], ['Yoho', 'yoho.png']
+      ], false, '50s'),
+      logoRowB: this._logoRow([
+        ['Vaaree', 'vaaree-k.png'], ['Supersox', 'supersox-k.png'], ['Nourish You', 'nourishyou.png'], ['Evara', 'evara.svg'],
+        ['Mackly', 'mackly.avif'], ['Vedansh', 'vedansh-k.png'], ['Chowkhat', 'chowkhat.avif'], ['Jaipuri Crown', 'jaipuricrown.png'],
+        ['Ghani Putri', 'ghaniputri.png'], ['Gataca', 'gataca.png'], ['Loving Crafts', 'lovingcrafts.avif']
+      ], true, '62s')
+    };
+  }
+}
+</script>
+</body>
+</html>
