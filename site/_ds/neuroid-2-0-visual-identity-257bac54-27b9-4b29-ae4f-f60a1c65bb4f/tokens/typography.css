@@ -1,0 +1,56 @@
+/* ============================================================
+   NEUROID — Typography tokens (STRICT)
+   FH Lecturis Bold — COVER HEADLINE ONLY. ~50pt, leading ~0.98,
+     yellow on black, ends with a red full stop.
+   DM Sans — everything else. Headlines: Bold, tracking −0.035em.
+     Body: Regular, line-height 1.4–1.55. Micro-labels: Bold,
+     ALL CAPS, letter-spacing 0.18–0.22em.
+   PP Editorial New Italic — accent serif: yellow-highlight words,
+     body emphasis, pull-quote banners, back-cover sign-off.
+   ============================================================ */
+:root {
+  /* ---- Families ---- */
+  --font-display: "FH Lecturis"; /* display font — never pair with fallbacks */
+  --font-sans:    "DM Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-serif:   "PP Editorial New", Georgia, "Times New Roman", serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---- Weights (DM Sans variable) ---- */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* ---- Fluid display scale (posters / hero) ---- */
+  --type-display-1: clamp(3.5rem, 9vw, 8.5rem);   /* 56 → 136 */
+  --type-display-2: clamp(2.75rem, 6.5vw, 6rem);  /* 44 → 96  */
+  --type-display-3: clamp(2.25rem, 5vw, 4.25rem); /* 36 → 68  */
+
+  /* ---- Headings ---- */
+  --type-h1: 3rem;     /* 48 */
+  --type-h2: 2.25rem;  /* 36 */
+  --type-h3: 1.625rem; /* 26 */
+  --type-h4: 1.25rem;  /* 20 */
+
+  /* ---- Body & UI ---- */
+  --type-lead:  1.375rem;  /* 22 — intro paragraphs */
+  --type-body:  1rem;      /* 16 */
+  --type-sm:    0.875rem;  /* 14 */
+  --type-xs:    0.75rem;   /* 12 */
+  --type-label: 0.6875rem; /* 11 — overline / eyebrow */
+
+  /* ---- Line heights ---- */
+  --leading-tight:   0.98;  /* cover headline */
+  --leading-snug:    1.08;
+  --leading-heading: 1.15;
+  --leading-body:    1.55;
+  --leading-relaxed: 1.7;
+
+  /* ---- Letter spacing ---- */
+  --tracking-tight:  -0.03em;  /* display */
+  --tracking-snug:   -0.015em; /* headings */
+  --tracking-normal: 0em;
+  --tracking-wide:   0.04em;
+  --tracking-label:  0.2em;    /* uppercase micro-labels (0.18–0.22em) */
+}

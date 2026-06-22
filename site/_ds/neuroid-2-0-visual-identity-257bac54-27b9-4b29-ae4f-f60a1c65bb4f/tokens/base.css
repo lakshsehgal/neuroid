@@ -1,0 +1,132 @@
+/* ============================================================
+   NEUROID — Base element defaults
+   Minimal, opinionated reset that wires tokens to the document.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings — DM Sans Bold, tracking −0.035em. FH Lecturis is reserved for
+   the COVER headline (.nrd-cover-headline) — never on H1–H3 defaults. */
+h1, h2, h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  color: var(--text-strong);
+  line-height: var(--leading-heading);
+  letter-spacing: -0.035em;
+  margin: 0 0 var(--space-4);
+  text-wrap: balance;
+}
+h1 { font-size: var(--type-h1); line-height: var(--leading-snug); }
+h2 { font-size: var(--type-h2); }
+h3 { font-size: var(--type-h3); }
+h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  font-size: var(--type-h4);
+  letter-spacing: var(--tracking-snug);
+  margin: 0 0 var(--space-3);
+  color: var(--text-strong);
+}
+
+p { margin: 0 0 var(--space-4); text-wrap: pretty; }
+
+a { color: inherit; text-underline-offset: 0.18em; }
+
+/* Eyebrow / overline */
+.nrd-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Editorial italic emphasis */
+.nrd-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ---- Signature moves ---- */
+/* Cover headline — FH Lecturis, yellow on black, red full stop. COVER ONLY. */
+.nrd-cover-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--neuroid-yellow);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+/* Yellow-highlight word inside a headline — ALWAYS switches to PP Editorial
+   New Italic on the yellow block. This is the only serif allowed in a headline. */
+.nrd-highlight {
+  background: var(--neuroid-yellow);
+  color: var(--neuroid-ink);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  padding: 0 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* Full stop at the end of a display headline — a SQUARE red block, not a round
+   period (block-focused, per the moodboard). Use on an (ideally empty) span at
+   the end of the headline; any "." inside is hidden. Sits on the baseline. */
+.nrd-stop {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  background: var(--neuroid-red);
+  color: transparent;
+  line-height: 0;
+  overflow: hidden;
+  vertical-align: baseline;
+  margin-left: 0.06em;
+}
+/* Pixel squares motif ■ ■ ■ (yellow, yellow, red) — footers & punctuation */
+.nrd-pixels { display: inline-flex; gap: 5px; }
+.nrd-pixels i { width: 8px; height: 8px; background: var(--neuroid-yellow); }
+.nrd-pixels i:last-child { background: var(--neuroid-red); }
+
+/* Ticker bar — repeating micro-label strip ("BUILD HUMAN BRANDS ·…").
+   Stack two: one ink-on-yellow, one yellow-on-ink. */
+.nrd-ticker {
+  display: flex;
+  gap: 2.5em;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.55em 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  background: var(--neuroid-ink);
+  color: var(--neuroid-yellow);
+}
+.nrd-ticker--yellow {
+  background: var(--neuroid-yellow);
+  color: var(--neuroid-ink);
+}
+
+::selection { background: var(--neuroid-yellow); color: var(--neuroid-ink); }
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}

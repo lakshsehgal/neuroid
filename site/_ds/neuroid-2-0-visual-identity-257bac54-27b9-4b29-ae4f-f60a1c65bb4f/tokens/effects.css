@@ -1,0 +1,83 @@
+/* ============================================================
+   NEUROID — Effects: elevation, motion, signature textures
+   The brand is flat & brutalist. Depth = hard offset blocks,
+   not soft blur. Texture = halftone dots + voxel/pixel grids.
+   ============================================================ */
+:root {
+  /* ---- Elevation: hard "printed" offsets, no blur ---- */
+  --shadow-none:  none;
+  --shadow-hard:  3px 3px 0 0 var(--neuroid-ink);   /* card / button block */
+  --shadow-hard-lg: 6px 6px 0 0 var(--neuroid-ink);
+  --shadow-hard-yellow: 4px 4px 0 0 var(--neuroid-yellow);
+  --shadow-hard-red:    4px 4px 0 0 var(--neuroid-red);
+  /* soft used ONLY for floating UI (menus, toasts) */
+  --shadow-pop: 0 12px 32px -8px rgba(12,12,12,0.28), 0 2px 6px rgba(12,12,12,0.12);
+
+  /* ---- Focus ---- */
+  --focus-outline: 2px solid var(--neuroid-red);
+  --focus-offset:  2px;
+
+  /* ---- Motion — snappy, mechanical, minimal ---- */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);   /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  /* crisp, slightly clipped */
+  --ease-snap:  cubic-bezier(0.5, 0, 0, 1); /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   360ms; /* @kind other */
+
+  /* ---- Signature textures ----
+     RULES (strict):
+     • Content slides / pages with text are FLAT black or white. NO texture.
+     • Halftone appears ONLY as a masked edge-bleed on the cover and back
+       cover — one edge, 35–50% opacity, never behind any text.
+     • Never tile a halftone image across a surface; the scans are small and
+       repeat visibly. Always background-size: cover on a cropped region.
+     assets/textures/halftone-coarse.png — the ONE halftone asset for bleeds. */
+
+  /* CSS fallbacks (when an image is impractical) */
+  /* Halftone dot field — pair with a dark or yellow fill behind */
+  --texture-halftone:
+    radial-gradient(circle at center, var(--neuroid-ink) 32%, transparent 33%);
+  --texture-halftone-size: 7px 7px;
+
+  /* Fine technical dot-grid (blueprint) */
+  --texture-dotgrid:
+    radial-gradient(circle at center, var(--gray-300) 1px, transparent 1.4px);
+  --texture-dotgrid-size: 22px 22px;
+
+  /* Engineering line-grid */
+  --texture-linegrid:
+    linear-gradient(to right, var(--gray-200) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--gray-200) 1px, transparent 1px);
+  --texture-linegrid-size: 40px 40px;
+}
+
+/* Utility classes a consumer can drop onto an element */
+/* Cover/back-cover edge bleed — the ONLY sanctioned halftone use.
+   Put on an absolutely-positioned strip along one edge, never the whole slide. */
+.nrd-halftone-bleed {
+  background-image: url("../assets/textures/halftone-coarse.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.45;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
+          mask-image: linear-gradient(90deg, transparent, #000 60%);
+}
+.nrd-halftone-photo {
+  background-image: url("../assets/textures/halftone-coarse.png");
+  background-size: cover;
+  background-position: center;
+}
+.nrd-halftone {
+  background-image: var(--texture-halftone);
+  background-size: var(--texture-halftone-size);
+}
+.nrd-dotgrid {
+  background-image: var(--texture-dotgrid);
+  background-size: var(--texture-dotgrid-size);
+}
+.nrd-linegrid {
+  background-image: var(--texture-linegrid);
+  background-size: var(--texture-linegrid-size);
+}

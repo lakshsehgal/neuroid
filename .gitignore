@@ -1,0 +1,9 @@
+# Build artifacts
+neuroid-portfolio-site.zip
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
