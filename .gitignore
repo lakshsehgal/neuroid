@@ -7,3 +7,4 @@ neuroid-portfolio-site.zip
 Thumbs.db
 *.log
 node_modules/
+*.bundle
