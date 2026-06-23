@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio — Neuroid</title>
-<meta name="description" content="A wall of work that actually performed. Hundreds of scroll-stopping creatives — performance video, UGC, social and ad films — built for D2C brands by Neuroid.">
+<title>Neuroid — Integrated Growth &amp; Creative Studio for D2C</title>
+<meta name="description" content="The creative people feel and the media that scales it — designed together, run together. Neuroid is an integrated growth &amp; creative studio for D2C brands. ₹450Cr+ revenue influenced, 100+ brands.">
 
-<!-- Speed: warm up the Cloudinary video CDN before the wall needs it -->
+<!-- Speed: warm up the Cloudinary video CDN before the hero needs it -->
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="dns-prefetch" href="https://res.cloudinary.com">
 
@@ -20,8 +20,15 @@
 
   @keyframes nrd-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   @keyframes nrd-marquee-rev{from{transform:translateX(-50%);}to{transform:translateX(0);}}
-  @keyframes nrd-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-  @keyframes nrd-pop{0%{opacity:0;transform:scale(0.96);}100%{opacity:1;transform:scale(1);}}
+  @keyframes nrd-spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+  @keyframes nrd-dashflow{to{stroke-dashoffset:-120;}}
+  @keyframes nrd-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  @keyframes nrd-drift{0%,100%{transform:translate(0,0);}50%{transform:translate(8px,-6px);}}
+  @keyframes nrd-rise-up{from{transform:translateY(0);}to{transform:translateY(-50%);}}
+  @keyframes nrd-rise-down{from{transform:translateY(-50%);}to{transform:translateY(0);}}
+  @keyframes nrd-pop{0%{opacity:0;transform:scale(0.9);}100%{opacity:1;transform:scale(1);}}
+  @keyframes nrd-pulse{0%,100%{transform:scale(1);opacity:0.9;}50%{transform:scale(1.08);opacity:1;}}
+  @keyframes nrd-grow{0%,100%{transform:scaleY(0.55);}50%{transform:scaleY(1);}}
   @media (prefers-reduced-motion:reduce){*{animation:none !important;}}
 
   /* ---- Button (faithful reproduction of NeuroidDesignSystem Button) ---- */
@@ -34,6 +41,7 @@
   .nrd-btn--lg{font-size:17px;padding:16px 28px;gap:10px;}
   .nrd-btn--primary{background:var(--neuroid-yellow);color:var(--neuroid-ink);}
   .nrd-btn--inverse{background:var(--neuroid-ink);color:var(--neuroid-paper);}
+  .nrd-btn--outline{background:transparent;color:var(--neuroid-ink);}
   .nrd-btn--full{width:100%;}
   .nrd-btn--block{box-shadow:3px 3px 0 0 var(--neuroid-ink);}
   .nrd-btn--block:active{transform:translate(3px,3px);box-shadow:0 0 0 0 var(--neuroid-ink);}
@@ -50,6 +58,52 @@
   #mobileMenu{display:none;}
   #mobileMenu.open{display:block;}
 
+  /* ---- Services hover dropdown (CSS replaces JS open state) ---- */
+  .svc-dd{position:relative;}
+  .svc-menu{position:absolute;top:calc(100% + 8px);left:0;width:280px;background:var(--neuroid-paper);
+    border:1.5px solid var(--neuroid-ink);box-shadow:6px 6px 0 0 var(--neuroid-ink);padding:6px;
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s var(--ease-out), transform .2s var(--ease-snap), visibility .2s;z-index:60;}
+  .svc-dd:hover .svc-menu, .svc-dd:focus-within .svc-menu{opacity:1;visibility:visible;transform:none;}
+  .svc-dd:hover .svc-chev{transform:rotate(180deg);}
+  .svc-menu a{display:block;text-decoration:none;color:var(--neuroid-ink);padding:11px 14px;font-size:14px;}
+  .svc-menu a:hover{background:var(--neuroid-yellow);}
+
+  /* ---- The Loop responsive (CSS replaces JS width state at 860px) ---- */
+  .loop-desktop{display:block;}
+  .loop-mobile{display:none;}
+  @media (max-width:859px){
+    .loop-desktop{display:none;}
+    .loop-mobile{display:block;}
+  }
+
+  /* ---- Service stage motif (static fallback for the design-tool jsx animations) ---- */
+  .svc-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1.6px) 0 0 / 26px 26px, #0a0a0a;}
+  .svc-fig-label{position:absolute;left:16px;bottom:14px;font-family:var(--font-mono);font-size:10px;font-weight:700;
+    letter-spacing:0.14em;color:rgba(255,255,255,0.4);}
+
+  /* ---- Work card hover (CSS replaces JS handlers) ---- */
+  .work-card{position:relative;border:1.5px solid var(--neuroid-ink);box-shadow:5px 5px 0 0 var(--neuroid-ink);
+    overflow:hidden;aspect-ratio:4 / 5;cursor:pointer;transition:transform .22s var(--ease-snap), box-shadow .22s var(--ease-snap);}
+  .work-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 0 var(--neuroid-yellow);}
+  .work-card [data-ov]{opacity:0;transition:opacity .25s ease;}
+  .work-card:hover [data-ov]{opacity:1;}
+
+  /* ---- Value card + quote card hover ---- */
+  .val-card{transition:transform .32s cubic-bezier(.16,1,.3,1), box-shadow .32s cubic-bezier(.16,1,.3,1);}
+  .val-card:hover{transform:translateY(-5px);box-shadow:8px 8px 0 0 var(--neuroid-yellow);}
+  .quote-card{transition:transform .22s var(--ease-snap), box-shadow .22s var(--ease-snap);}
+  .quote-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 0 var(--neuroid-yellow);}
+
+  /* ---- Logo marquee cell hover ---- */
+  .logo-cell{flex:none;width:186px;height:88px;margin-right:16px;display:flex;align-items:center;justify-content:center;
+    padding:16px 26px;border:1px solid var(--neuroid-ink);border-radius:12px;background:var(--neuroid-paper);
+    transition:background .22s var(--ease-snap), box-shadow .22s var(--ease-snap), transform .22s var(--ease-snap);}
+  .logo-cell img{max-width:100%;max-height:40px;width:auto;object-fit:contain;mix-blend-mode:multiply;
+    filter:grayscale(1);opacity:0.82;transition:filter .22s var(--ease-snap), opacity .22s var(--ease-snap);}
+  .logo-cell:hover{background:var(--neuroid-yellow);box-shadow:3px 3px 0 0 var(--neuroid-ink);transform:translate(-1px,-1px);}
+  .logo-cell:hover img{filter:none;opacity:1;}
+
   [data-reveal]{will-change:opacity,transform;}
 </style>
 </head>
@@ -59,21 +113,30 @@
 
 <!-- ============ NAV ============ -->
 <header style="position:sticky;top:0;z-index:50;background:rgba(244,241,234,0.92);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--neuroid-ink);">
-  <div style="max-width:1320px;margin:0 auto;padding:14px clamp(18px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:24px;">
+  <div style="max-width:1280px;margin:0 auto;padding:14px clamp(18px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:24px;">
     <a href="#top" style="display:flex;align-items:center;flex:none;text-decoration:none;">
       <img src="assets/brand/neuroid-logo-black.svg" alt="Neuroid" style="height:40px;width:auto;display:block;">
     </a>
 
     <nav style="display:flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:600;font-size:14px;">
       <div class="nav-desktop">
-        <a href="#" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">Home</a>
-        <a href="#work" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;border-bottom:2px solid var(--neuroid-ink);">Work</a>
-        <a href="#" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">Services</a>
-        <a href="#" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">About</a>
+        <a href="/portfolio" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">Work</a>
+        <div class="svc-dd">
+          <a href="#services" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;display:inline-flex;align-items:center;gap:6px;letter-spacing:-0.01em;">Services
+            <svg class="svc-chev" width="11" height="11" viewBox="0 0 12 12" fill="none" style="transition:transform .2s var(--ease-snap);"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>
+          </a>
+          <div class="svc-menu">
+            <a href="#services">Performance Marketing</a>
+            <a href="#services">Performance Creatives &amp; UGC</a>
+            <a href="#services">Socials, Campaigns &amp; IPs</a>
+            <a href="#services">CRO &amp; Retention</a>
+          </div>
+        </div>
+        <a href="#about" style="text-decoration:none;color:var(--neuroid-ink);padding:8px 14px;letter-spacing:-0.01em;">About</a>
       </div>
 
       <div style="display:flex;align-items:center;gap:10px;">
-        <a class="nav-desktop-cta" href="mailto:hello@neuroidmedia.com" style="text-decoration:none;">
+        <a class="nav-desktop-cta" href="#contact" style="text-decoration:none;">
           <span class="nrd-btn nrd-btn--primary nrd-btn--block nrd-btn--sm">Book a Growth Audit</span>
         </a>
         <button class="nav-mobile-btn" id="hamburger" aria-label="Menu" style="background:none;border:1.5px solid var(--neuroid-ink);width:42px;height:38px;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0;">
@@ -86,12 +149,11 @@
   </div>
 
   <div id="mobileMenu" style="border-top:1.5px solid var(--neuroid-ink);background:var(--neuroid-paper);padding:8px clamp(18px,4vw,56px) 18px;">
-    <a href="#" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Home</a>
-    <a href="#work" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Work</a>
-    <a href="#" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Services</a>
-    <a href="#" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">About</a>
+    <a href="/portfolio" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Work</a>
+    <a href="#services" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">Services</a>
+    <a href="#about" data-close style="display:block;text-decoration:none;color:var(--neuroid-ink);padding:12px 0;font-weight:600;border-bottom:1px solid rgba(12,12,12,0.1);">About</a>
     <div style="padding-top:14px;">
-      <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;">
+      <a href="#contact" data-close style="text-decoration:none;">
         <span class="nrd-btn nrd-btn--primary nrd-btn--block nrd-btn--full nrd-btn--md">Book a Growth Audit</span>
       </a>
     </div>
@@ -99,71 +161,408 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section id="top" style="position:relative;background:radial-gradient(circle at center, rgba(12,12,12,0.07) 1.3px, transparent 1.9px) 0 0 / 22px 22px, #F4F1EA;padding:clamp(48px,7vw,96px) clamp(18px,4vw,56px) clamp(40px,5vw,64px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
-  <div style="max-width:1320px;margin:0 auto;">
-    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:26px;color:var(--neuroid-ink);">
-      <span style="width:8px;height:8px;background:var(--neuroid-red);display:inline-block;flex:none;"></span>
-      <span>Portfolio - Selected creative</span>
-    </div>
-    <h1 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.98;font-size:clamp(2.7rem,7.2vw,6rem);margin:0;max-width:16ch;text-wrap:balance;">A wall of work that actually <span class="nrd-highlight" style="font-family:var(--font-serif);font-style:italic;font-weight:400;">performed</span><span style="display:inline-block;width:0.15em;height:0.15em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.04em;"></span></h1>
-    <p data-reveal style="font-size:clamp(1.05rem,1.6vw,1.32rem);line-height:1.5;max-width:600px;margin:30px 0 0;color:var(--neuroid-grey);">Hundreds of scroll-stopping creatives - performance video, UGC, social and ad films - built for D2C brands and shipped at a volume most studios can&rsquo;t touch. This is a slice.</p>
-  </div>
-</section>
-
-<!-- ============ STAT STRIP ============ -->
-<section style="border-bottom:1.5px solid var(--neuroid-ink);background:var(--neuroid-ink);color:var(--neuroid-paper);">
-  <div id="statCells" style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,180px),1fr));"></div>
-</section>
-
-<!-- ============ GALLERY ============ -->
-<section id="work" style="padding:clamp(44px,6vw,80px) clamp(18px,4vw,56px) clamp(56px,8vw,104px);border-bottom:1.5px solid var(--neuroid-ink);">
-  <div style="max-width:1320px;margin:0 auto;">
-    <div data-reveal style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px;margin-bottom:clamp(26px,3.4vw,40px);">
-      <div>
-        <div style="display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-red);margin-bottom:16px;">
-          <span>/</span><span>The creative wall</span>
-        </div>
-        <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.02;font-size:clamp(1.7rem,3.4vw,2.8rem);margin:0;max-width:18ch;">Every tile shipped, tested &amp; <span class="nrd-highlight">scaled</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;"></span></h2>
+<section id="top" style="position:relative;min-height:94vh;background:radial-gradient(circle at center, rgba(12,12,12,0.07) 1.3px, transparent 1.9px) 0 0 / 22px 22px, #F4F1EA;color:var(--neuroid-ink);display:flex;align-items:center;padding:clamp(40px,5vw,72px) clamp(18px,4vw,56px);overflow:hidden;">
+  <div style="position:relative;max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(300px,0.95fr) minmax(0,1.05fr);gap:clamp(32px,5vw,60px);align-items:center;" class="hero-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:26px;color:var(--neuroid-ink);">
+        <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+        <span>Integrated Growth &amp; Creative Studio</span>
       </div>
-      <div id="resultCount" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--neuroid-grey);padding-bottom:6px;"></div>
+      <h1 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.0;font-size:clamp(2.6rem,5.6vw,4.8rem);margin:0;text-wrap:balance;color:var(--neuroid-ink);">Content that <span class="nrd-highlight">connects</span>. Performance that <span class="nrd-highlight">compounds</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h1>
+      <p style="font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.5;max-width:560px;margin:28px 0 0;color:var(--neuroid-grey);">The creative people feel and the media that scales it - designed together, run together, by one team that acts like yours.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;margin-top:38px;">
+        <a href="#contact" style="text-decoration:none;"><span class="nrd-btn nrd-btn--primary nrd-btn--block nrd-btn--lg">Book a Growth Audit</span></a>
+        <a href="/portfolio" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--neuroid-ink);font-family:var(--font-sans);font-weight:700;font-size:16px;letter-spacing:-0.01em;border-bottom:2px solid var(--neuroid-ink);padding-bottom:3px;">See the work <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px;margin-top:42px;">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--neuroid-grey);font-weight:700;">Trusted partner</span>
+        <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;">
+          <div style="height:52px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:#fff;border:1.5px solid var(--neuroid-ink);">
+            <img src="assets/partners/meta-partner.webp" alt="Meta Business Partner" style="height:34px;width:auto;display:block;">
+          </div>
+          <div style="height:52px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:#fff;border:1.5px solid var(--neuroid-ink);">
+            <img src="assets/partners/google-partner.webp" alt="Google Partner" style="height:34px;width:auto;display:block;">
+          </div>
+          <div style="height:52px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:#fff;border:1.5px solid var(--neuroid-ink);">
+            <img src="assets/partners/shopify-partner.webp" alt="Shopify Partner" style="height:19px;width:auto;display:block;">
+          </div>
+          <div style="height:52px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:#fff;border:1.5px solid var(--neuroid-ink);">
+            <img src="assets/partners/gokwik.webp" alt="GoKwik" style="height:21px;width:auto;display:block;">
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="galleryTiles" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,15.5vw,210px),1fr));gap:clamp(12px,1.4vw,18px);"></div>
+    <div style="position:relative;height:min(88vh,880px);">
+      <div id="heroGallery" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;height:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);mask-image:linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);"></div>
+    </div>
   </div>
 </section>
 
-<!-- ============ BRAND WALL ============ -->
-<section style="padding:clamp(48px,7vw,88px) 0;border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
-  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,56px);">
-    <div data-reveal style="display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-red);margin-bottom:18px;">
-      <span>/</span><span>Made for</span>
-    </div>
-    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.5rem,3vw,2.4rem);margin:0 0 clamp(32px,4.5vw,52px);max-width:22ch;">The brands behind the work - <span style="font-family:var(--font-serif);font-style:italic;font-weight:400;">100+</span> and counting.</h2>
+<!-- ============ PROOF RIBBONS (crossing) ============ -->
+<section style="position:relative;background:radial-gradient(circle at center, rgba(12,12,12,0.07) 1.3px, transparent 1.9px) 0 0 / 22px 22px, #F4F1EA;overflow:hidden;height:clamp(150px,16vw,196px);margin:-1px 0;">
+  <div style="position:absolute;left:-6%;top:50%;width:112%;transform:translateY(-50%) rotate(3.4deg);background:var(--neuroid-yellow);border-top:1.5px solid var(--neuroid-ink);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;z-index:1;box-shadow:0 8px 18px rgba(0,0,0,0.10);">
+    <div id="ribbonYellow"></div>
   </div>
-  <div data-reveal style="display:flex;flex-direction:column;gap:16px;padding:0 clamp(18px,4vw,56px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);">
+  <div style="position:absolute;left:-6%;top:50%;width:112%;transform:translateY(-50%) rotate(-3.4deg);background:var(--neuroid-ink);border-top:1.5px solid var(--neuroid-ink);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;z-index:2;box-shadow:0 12px 26px rgba(0,0,0,0.22);">
+    <div id="ribbonInk"></div>
+  </div>
+</section>
+
+<!-- ============ LOGO WALL ============ -->
+<section id="brands" style="padding:clamp(56px,8vw,104px) 0;border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px);">
+    <div data-reveal style="display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-red);margin-bottom:22px;">
+      <span>/</span>
+      <span>The Portfolio</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin:0 0 clamp(40px,6vw,64px);">
+      <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.9rem,4vw,3.2rem);margin:0;max-width:680px;">Growth partners to some of the <span class="nrd-highlight" style="font-family:var(--font-serif);font-style:italic;font-weight:400;">top</span> D2C brands in India.</h2>
+      <p data-reveal style="font-size:1rem;line-height:1.5;color:var(--neuroid-grey);max-width:360px;margin:0 0 6px;">A glimpse of the <strong style="color:var(--neuroid-ink);font-weight:600;">100+ brands</strong> we&rsquo;ve scaled - driving <strong style="color:var(--neuroid-ink);font-weight:600;">&#8377;400Cr+</strong> in attributed client revenue.</p>
+    </div>
+  </div>
+  <div data-reveal style="display:flex;flex-direction:column;gap:16px;padding:4px clamp(18px,4vw,56px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);">
     <div style="overflow:hidden;"><div id="logoRowA"></div></div>
     <div style="overflow:hidden;"><div id="logoRowB"></div></div>
+    <div style="overflow:hidden;"><div id="logoRowC"></div></div>
   </div>
 </section>
 
-<!-- ============ CTA ============ -->
-<section id="contact" style="position:relative;background:var(--neuroid-yellow);padding:clamp(64px,10vw,140px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+<!-- ============ WHO WE ARE ============ -->
+<section id="about" style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);">
+    <div data-reveal style="flex:1 1 320px;min-width:280px;">
+      <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+        <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+        <span>Who we are</span>
+      </div>
+      <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.02;font-size:clamp(2rem,4.3vw,3.5rem);margin:0;text-wrap:balance;">An extension of your team. Not another vendor<span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    </div>
+    <div data-reveal style="flex:1 1 380px;min-width:280px;display:flex;align-items:flex-end;">
+      <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.6;margin:0;">We're a senior team of growth marketers, creative strategists, filmmakers and lifecycle operators. We don't hand you a deck and disappear - we sit inside your business and treat your account like an <span style="font-family:var(--font-serif);font-style:italic;">operating problem</span>: what's the system, where's the leak, what compounds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE LOOP (signature) ============ -->
+<section id="loop" style="position:relative;background:var(--neuroid-ink);color:var(--neuroid-paper);padding:clamp(64px,9vw,128px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1.6px);background-size:30px 30px;pointer-events:none;"></div>
+  <div style="position:relative;max-width:1180px;margin:0 auto;">
+    <div data-reveal style="text-align:center;margin-bottom:clamp(40px,6vw,72px);">
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-yellow);margin-bottom:22px;">
+        <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+        <span>The Neuroid Loop</span>
+      </div>
+      <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.9rem,4.2vw,3.4rem);margin:0 auto;max-width:880px;color:#fff;text-wrap:balance;">Most agencies build a wall between creative and performance. We built a <span class="nrd-highlight">loop</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    </div>
+
+    <!-- Desktop circular diagram -->
+    <div class="loop-desktop" data-reveal>
+      <div style="position:relative;width:min(620px,86vw);height:min(620px,86vw);margin:0 auto;">
+        <svg viewBox="0 0 620 620" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+          <defs>
+            <filter id="loopGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="5.5" result="b"></feGaussianBlur>
+              <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+            </filter>
+          </defs>
+          <circle cx="310" cy="310" r="252" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1.5" stroke-dasharray="1 13" stroke-linecap="round"></circle>
+          <circle cx="310" cy="310" r="150" fill="none" stroke="rgba(254,239,36,0.32)" stroke-width="1.5" stroke-dasharray="6 12" style="animation:nrd-dashflow 3.5s linear infinite;"></circle>
+          <g filter="url(#loopGlow)">
+            <circle cx="310" cy="310" r="218" fill="none" stroke="var(--neuroid-yellow)" stroke-width="3.5"></circle>
+          </g>
+          <g fill="var(--neuroid-yellow)">
+            <path d="M464 156 l16 2 -7 14 z"></path>
+            <path d="M464 464 l-2 16 -14 -7 z"></path>
+            <path d="M156 464 l-16 -2 7 -14 z"></path>
+            <path d="M156 156 l2 -16 14 7 z"></path>
+          </g>
+          <g fill="var(--neuroid-yellow)" stroke="var(--neuroid-ink)" stroke-width="1.5">
+            <rect x="303" y="85" width="14" height="14" transform="rotate(45 310 92)"></rect>
+            <rect x="521" y="303" width="14" height="14" transform="rotate(45 528 310)"></rect>
+            <rect x="303" y="521" width="14" height="14" transform="rotate(45 310 528)"></rect>
+            <rect x="85" y="303" width="14" height="14" transform="rotate(45 92 310)"></rect>
+          </g>
+          <g style="transform-box:view-box;transform-origin:310px 310px;animation:nrd-spin 9s linear infinite;">
+            <circle cx="310" cy="92" r="15" fill="var(--neuroid-yellow)" opacity="0.4" filter="url(#loopGlow)"></circle>
+            <circle cx="310" cy="92" r="7" fill="var(--neuroid-yellow)"></circle>
+            <circle cx="310" cy="89" r="2.6" fill="#fff"></circle>
+          </g>
+          <circle cx="310" cy="310" r="108" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1.5" stroke-dasharray="2 10"></circle>
+          <circle cx="310" cy="310" r="90" fill="#141414" stroke="var(--neuroid-yellow)" stroke-width="1.5"></circle>
+        </svg>
+
+        <div style="position:absolute;left:50%;top:0;transform:translate(-50%,-2%);width:180px;" data-loopnode="01|Ship|Put creative + media live, fast."></div>
+        <div style="position:absolute;right:0;top:50%;transform:translate(2%,-50%);width:180px;" data-loopnode="02|Read the signal|Signal from noise in the data."></div>
+        <div style="position:absolute;left:50%;bottom:0;transform:translate(-50%,2%);width:180px;" data-loopnode="03|Sharpen|Cut what fails, back the winners."></div>
+        <div style="position:absolute;left:0;top:50%;transform:translate(-2%,-50%);width:180px;" data-loopnode="04|Scale|Compound winners, profitably."></div>
+
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:172px;pointer-events:none;">
+          <svg width="46" height="46" viewBox="0 0 48 48" fill="none" style="animation:nrd-spin 14s linear infinite;display:inline-block;">
+            <path d="M41 24a17 17 0 1 1-5-12.05" stroke="var(--neuroid-yellow)" stroke-width="3.4" stroke-linecap="round"></path>
+            <path d="M41 7v10.5H30.5" stroke="var(--neuroid-yellow)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <div style="font-family:var(--font-sans);font-weight:700;font-size:15px;letter-spacing:-0.02em;margin-top:12px;color:#fff;line-height:1.3;">One team. One loop.<br><span style="color:var(--neuroid-yellow);">No handoff.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile vertical -->
+    <div class="loop-mobile" data-reveal>
+      <div id="loopVertical" style="max-width:420px;margin:0 auto;display:flex;flex-direction:column;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONE ENGINE, TWO WAYS IN ============ -->
+<section style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+      <span>Two ways in</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.8rem,3.6vw,3rem);margin:0 0 44px;max-width:820px;">However you come to us, you plug into the <span class="nrd-highlight">same loop</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:24px;">
+      <div data-reveal style="background:var(--neuroid-paper);border:1.5px solid var(--neuroid-ink);box-shadow:6px 6px 0 0 var(--neuroid-ink);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;">
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--neuroid-grey);">A - Growth</div>
+        <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.5rem,2.6vw,2.1rem);margin:14px 0 16px;">"We've hit a ceiling."</h3>
+        <p style="font-size:1.05rem;line-height:1.55;margin:0 0 28px;flex:1;opacity:0.86;">Stuck at the same revenue, ROAS drops every time you scale, and your team can't think past the ad account.</p>
+        <a href="#contact" style="text-decoration:none;align-self:flex-start;"><span class="nrd-btn nrd-btn--inverse nrd-btn--md">Come in for growth →</span></a>
+      </div>
+      <div data-reveal style="background:var(--neuroid-yellow);border:1.5px solid var(--neuroid-ink);box-shadow:6px 6px 0 0 var(--neuroid-ink);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;">
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--neuroid-ink);opacity:0.6;">B - Creative</div>
+        <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.5rem,2.6vw,2.1rem);margin:14px 0 16px;">"We need creative that delivers."</h3>
+        <p style="font-size:1.05rem;line-height:1.55;margin:0 0 28px;flex:1;">You've got the performance team - you need a reliable creative engine: quality, volume, on time, that actually performs.</p>
+        <a href="#contact" style="text-decoration:none;align-self:flex-start;"><span class="nrd-btn nrd-btn--inverse nrd-btn--md">Come in for creative →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+      <span>Services</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.8rem,3.6vw,3rem);margin:0 0 44px;max-width:760px;">Four disciplines. One <span class="nrd-highlight">operating system</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:clamp(20px,2.6vw,34px);">
+
+      <div data-reveal style="border:1.5px solid var(--neuroid-ink);box-shadow:8px 8px 0 0 var(--neuroid-ink);overflow:hidden;background:#0a0a0a;">
+        <div style="position:relative;aspect-ratio:16 / 9;overflow:hidden;background:#0a0a0a;">
+          <div class="svc-stage">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <line x1="18" y1="74" x2="102" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-dasharray="5 7"/>
+              <g style="animation:nrd-float 3.4s ease-in-out infinite;">
+                <path d="M60 64 V30 M60 30 l-12 14 M60 30 l12 14" stroke="var(--neuroid-yellow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="50" y="64" width="20" height="20" fill="var(--neuroid-yellow)"/>
+              </g>
+            </svg>
+            <span class="svc-fig-label">FIG.01 — CEILING BREAK</span>
+          </div>
+        </div>
+        <div style="padding:clamp(18px,2.2vw,28px);border-top:1.5px solid var(--neuroid-ink);background:#0c0c0c;">
+          <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.05;margin:0 0 6px;color:#fff;">Performance Marketing</h3>
+          <p style="font-size:clamp(0.92rem,1.15vw,1.05rem);line-height:1.45;margin:0;color:rgba(255,255,255,0.72);max-width:46ch;">Meta + Google, run as growth strategy.</p>
+        </div>
+      </div>
+
+      <div data-reveal style="border:1.5px solid var(--neuroid-ink);box-shadow:8px 8px 0 0 var(--neuroid-ink);overflow:hidden;background:#0a0a0a;">
+        <div style="position:relative;aspect-ratio:16 / 9;overflow:hidden;background:#0a0a0a;">
+          <div class="svc-stage">
+            <svg width="130" height="110" viewBox="0 0 130 110" fill="none">
+              <rect x="26" y="26" width="58" height="58" rx="6" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              <rect x="46" y="40" width="58" height="58" rx="6" fill="#0a0a0a" stroke="var(--neuroid-yellow)" stroke-width="2.5" style="animation:nrd-drift 4s ease-in-out infinite;"/>
+              <path d="M66 60 l18 9 -18 9 z" fill="var(--neuroid-yellow)" style="animation:nrd-pulse 2.6s ease-in-out infinite;transform-origin:75px 69px;"/>
+            </svg>
+            <span class="svc-fig-label">FIG.02 — SIGNAL MATCH</span>
+          </div>
+        </div>
+        <div style="padding:clamp(18px,2.2vw,28px);border-top:1.5px solid var(--neuroid-ink);background:#0c0c0c;">
+          <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.05;margin:0 0 6px;color:#fff;">Performance Creatives &amp; UGC</h3>
+          <p style="font-size:clamp(0.92rem,1.15vw,1.05rem);line-height:1.45;margin:0;color:rgba(255,255,255,0.72);max-width:46ch;">200+ money-printing creatives a month.</p>
+        </div>
+      </div>
+
+      <div data-reveal style="border:1.5px solid var(--neuroid-ink);box-shadow:8px 8px 0 0 var(--neuroid-ink);overflow:hidden;background:#0a0a0a;">
+        <div style="position:relative;aspect-ratio:16 / 9;overflow:hidden;background:#0a0a0a;">
+          <div class="svc-stage">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="14" fill="var(--neuroid-yellow)"/>
+              <circle cx="60" cy="60" r="26" stroke="var(--neuroid-yellow)" stroke-width="2" opacity="0.7" style="animation:nrd-pulse 2.8s ease-in-out infinite;transform-origin:60px 60px;"/>
+              <circle cx="60" cy="60" r="40" stroke="rgba(255,255,255,0.28)" stroke-width="2" style="animation:nrd-pulse 2.8s ease-in-out infinite .4s;transform-origin:60px 60px;"/>
+              <circle cx="60" cy="60" r="54" stroke="rgba(255,255,255,0.15)" stroke-width="2" style="animation:nrd-pulse 2.8s ease-in-out infinite .8s;transform-origin:60px 60px;"/>
+            </svg>
+            <span class="svc-fig-label">FIG.03 — BUILT FOR RECALL</span>
+          </div>
+        </div>
+        <div style="padding:clamp(18px,2.2vw,28px);border-top:1.5px solid var(--neuroid-ink);background:#0c0c0c;">
+          <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.05;margin:0 0 6px;color:#fff;">Socials, Campaigns &amp; IPs</h3>
+          <p style="font-size:clamp(0.92rem,1.15vw,1.05rem);line-height:1.45;margin:0;color:rgba(255,255,255,0.72);max-width:46ch;">Content, campaigns, ad films and IPs that build recall.</p>
+        </div>
+      </div>
+
+      <div data-reveal style="border:1.5px solid var(--neuroid-ink);box-shadow:8px 8px 0 0 var(--neuroid-ink);overflow:hidden;background:#0a0a0a;">
+        <div style="position:relative;aspect-ratio:16 / 9;overflow:hidden;background:#0a0a0a;">
+          <div class="svc-stage">
+            <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+              <g style="transform-origin:bottom;">
+                <rect x="22" y="58" width="20" height="34" fill="rgba(255,255,255,0.28)" style="animation:nrd-grow 2.4s ease-in-out infinite;transform-origin:32px 92px;"/>
+                <rect x="52" y="42" width="20" height="50" fill="rgba(255,255,255,0.5)" style="animation:nrd-grow 2.4s ease-in-out infinite .2s;transform-origin:62px 92px;"/>
+                <rect x="82" y="26" width="20" height="66" fill="var(--neuroid-yellow)" style="animation:nrd-grow 2.4s ease-in-out infinite .4s;transform-origin:92px 92px;"/>
+                <rect x="112" y="14" width="20" height="78" fill="var(--neuroid-yellow)" style="animation:nrd-grow 2.4s ease-in-out infinite .6s;transform-origin:122px 92px;"/>
+              </g>
+            </svg>
+            <span class="svc-fig-label">FIG.04 — COMPOUNDING LAYER</span>
+          </div>
+        </div>
+        <div style="padding:clamp(18px,2.2vw,28px);border-top:1.5px solid var(--neuroid-ink);background:#0c0c0c;">
+          <h3 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.05;margin:0 0 6px;color:#fff;">CRO &amp; Retention</h3>
+          <p style="font-size:clamp(0.92rem,1.15vw,1.05rem);line-height:1.45;margin:0;color:rgba(255,255,255,0.72);max-width:46ch;">The layer that compounds your spend.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div data-reveal style="margin-top:clamp(28px,3.5vw,44px);">
+      <a href="#contact" style="text-decoration:none;"><span class="nrd-btn nrd-btn--primary nrd-btn--block nrd-btn--md">Explore all services →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE WORK ============ -->
+<section id="work" style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:44px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+          <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+          <span>Selected Work</span>
+        </div>
+        <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.02;font-size:clamp(1.9rem,4vw,3.3rem);margin:0;">Brands that <span class="nrd-highlight">scaled</span> with us<span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+      </div>
+    </div>
+
+    <div id="workCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(16px,2vw,26px);"></div>
+
+    <div data-reveal style="margin-top:36px;">
+      <a href="/portfolio" style="text-decoration:none;"><span class="nrd-btn nrd-btn--outline nrd-btn--md">See all work →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY NEUROID (comparison) ============ -->
+<section style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+      <span>Why Neuroid</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.8rem,3.6vw,3rem);margin:0 0 44px;max-width:780px;">We're in your business. Not just your <span class="nrd-highlight">ad account</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+
+    <div data-reveal style="overflow-x:auto;border:1.5px solid var(--neuroid-ink);">
+      <table style="width:100%;min-width:720px;border-collapse:collapse;font-size:14px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:18px 20px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--neuroid-grey);font-weight:600;border-bottom:1.5px solid var(--neuroid-ink);">Capability</th>
+            <th style="padding:14px 16px;background:var(--neuroid-yellow);border-bottom:1.5px solid var(--neuroid-ink);border-left:1.5px solid var(--neuroid-ink);border-right:1.5px solid var(--neuroid-ink);">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><img src="assets/brand/neuroid-logo-on-yellow.svg" alt="Neuroid" style="height:18px;"></div>
+            </th>
+            <th style="padding:18px 14px;font-family:var(--font-sans);font-weight:700;font-size:13px;border-bottom:1.5px solid var(--neuroid-ink);">Performance<br>agency</th>
+            <th style="padding:18px 14px;font-family:var(--font-sans);font-weight:700;font-size:13px;border-bottom:1.5px solid var(--neuroid-ink);">Creative<br>agency</th>
+            <th style="padding:18px 14px;font-family:var(--font-sans);font-weight:700;font-size:13px;border-bottom:1.5px solid var(--neuroid-ink);">Freelancers</th>
+          </tr>
+        </thead>
+        <tbody id="compareRows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW WE WORK ============ -->
+<section style="background:var(--neuroid-ink);color:var(--neuroid-paper);padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-yellow);margin-bottom:18px;">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+      <span>How we work</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.8rem,3.6vw,3rem);margin:0 0 48px;max-width:820px;color:#fff;">From strategy to execution - with the <span class="nrd-highlight">least resistance</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    <div id="stepCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:1.5px;background:rgba(255,255,255,0.16);border:1.5px solid rgba(255,255,255,0.16);"></div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE BELIEVE (values) ============ -->
+<section id="values" style="position:relative;background:#F7F3EA;padding:clamp(72px,10vw,140px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(circle at center, rgba(12,12,12,0.05) 1px, transparent 1.6px);background-size:26px 26px;pointer-events:none;"></div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;">
+    <div style="max-width:760px;margin:0 0 clamp(48px,6.5vw,84px);">
+      <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-ink);margin-bottom:22px;">
+        <span style="width:8px;height:8px;background:var(--neuroid-red);display:inline-block;flex:none;"></span>
+        <span>What we believe</span>
+      </div>
+      <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:1.0;font-size:clamp(2.3rem,5vw,4rem);margin:0;color:var(--neuroid-ink);">How we show <span class="nrd-highlight">up</span>.</h2>
+      <p data-reveal style="font-size:clamp(1.1rem,1.7vw,1.4rem);line-height:1.5;margin:24px 0 0;color:var(--neuroid-grey-dark);max-width:520px;">The work is data-backed. The way we work is <span style="font-family:var(--font-serif);font-style:italic;color:var(--neuroid-ink);">human</span>.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:clamp(20px,2.4vw,28px);">
+      <div data-reveal class="val-card" style="position:relative;overflow:hidden;background:#F7F3EA;border:1.5px solid var(--neuroid-ink);padding:clamp(30px,3.6vw,48px);">
+        <div aria-hidden="true" style="position:absolute;top:-8px;left:clamp(24px,3vw,42px);width:128px;height:96px;background-image:radial-gradient(circle, rgba(12,12,12,0.18) 1.1px, transparent 1.7px);background-size:11px 11px;-webkit-mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);opacity:0.5;pointer-events:none;"></div>
+        <div style="position:relative;font-family:var(--font-mono);font-weight:700;font-size:clamp(32px,3.8vw,50px);letter-spacing:-0.02em;line-height:1;color:var(--neuroid-ink);margin-bottom:clamp(22px,3vw,34px);">01</div>
+        <h3 style="position:relative;font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.04;margin:0 0 14px;color:var(--neuroid-ink);">Strategically experimental</h3>
+        <p style="position:relative;font-size:clamp(0.98rem,1.3vw,1.1rem);line-height:1.55;margin:0;color:var(--neuroid-grey-dark);max-width:44ch;">We test like scientists, not gamblers. Every bet has a hypothesis, and the data decides what's next.</p>
+      </div>
+      <div data-reveal class="val-card" style="position:relative;overflow:hidden;background:#F7F3EA;border:1.5px solid var(--neuroid-ink);padding:clamp(30px,3.6vw,48px);">
+        <div aria-hidden="true" style="position:absolute;top:-8px;left:clamp(24px,3vw,42px);width:128px;height:96px;background-image:radial-gradient(circle, rgba(12,12,12,0.18) 1.1px, transparent 1.7px);background-size:11px 11px;-webkit-mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);opacity:0.5;pointer-events:none;"></div>
+        <div style="position:relative;font-family:var(--font-mono);font-weight:700;font-size:clamp(32px,3.8vw,50px);letter-spacing:-0.02em;line-height:1;color:var(--neuroid-ink);margin-bottom:clamp(22px,3vw,34px);">02</div>
+        <h3 style="position:relative;font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.04;margin:0 0 14px;color:var(--neuroid-ink);">Action over perfect</h3>
+        <p style="position:relative;font-size:clamp(0.98rem,1.3vw,1.1rem);line-height:1.55;margin:0;color:var(--neuroid-grey-dark);max-width:44ch;">We'd rather ship, learn and sharpen than wait for the perfect plan. Speed is a growth lever.</p>
+      </div>
+      <div data-reveal class="val-card" style="position:relative;overflow:hidden;background:#F7F3EA;border:1.5px solid var(--neuroid-ink);padding:clamp(30px,3.6vw,48px);">
+        <div aria-hidden="true" style="position:absolute;top:-8px;left:clamp(24px,3vw,42px);width:128px;height:96px;background-image:radial-gradient(circle, rgba(12,12,12,0.18) 1.1px, transparent 1.7px);background-size:11px 11px;-webkit-mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);opacity:0.5;pointer-events:none;"></div>
+        <div style="position:relative;font-family:var(--font-mono);font-weight:700;font-size:clamp(32px,3.8vw,50px);letter-spacing:-0.02em;line-height:1;color:var(--neuroid-ink);margin-bottom:clamp(22px,3vw,34px);">03</div>
+        <h3 style="position:relative;font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.04;margin:0 0 14px;color:var(--neuroid-ink);">Energetic &amp; optimistic</h3>
+        <p style="position:relative;font-size:clamp(0.98rem,1.3vw,1.1rem);line-height:1.55;margin:0;color:var(--neuroid-grey-dark);max-width:44ch;">We bring real energy to your brand. We actually care whether you win - and it shows.</p>
+      </div>
+      <div data-reveal class="val-card" style="position:relative;overflow:hidden;background:#F7F3EA;border:1.5px solid var(--neuroid-ink);padding:clamp(30px,3.6vw,48px);">
+        <div aria-hidden="true" style="position:absolute;top:-8px;left:clamp(24px,3vw,42px);width:128px;height:96px;background-image:radial-gradient(circle, rgba(12,12,12,0.18) 1.1px, transparent 1.7px);background-size:11px 11px;-webkit-mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);mask-image:radial-gradient(ellipse at top left,#000,transparent 70%);opacity:0.5;pointer-events:none;"></div>
+        <div style="position:relative;font-family:var(--font-mono);font-weight:700;font-size:clamp(32px,3.8vw,50px);letter-spacing:-0.02em;line-height:1;color:var(--neuroid-ink);margin-bottom:clamp(22px,3vw,34px);">04</div>
+        <h3 style="position:relative;font-family:var(--font-sans);font-weight:700;letter-spacing:-0.03em;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.04;margin:0 0 14px;color:var(--neuroid-ink);">Committed</h3>
+        <p style="position:relative;font-size:clamp(0.98rem,1.3vw,1.1rem);line-height:1.55;margin:0;color:var(--neuroid-grey-dark);max-width:44ch;">We treat your P&amp;L like it's ours. <span style="color:var(--neuroid-grey);">(Ask our clients about the 3am problem-solving.)</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section style="padding:clamp(56px,8vw,112px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div data-reveal style="display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px;">
+      <span style="width:8px;height:8px;background:var(--neuroid-red);border-radius:0;display:inline-block;flex:none;"></span>
+      <span>Testimonials</span>
+    </div>
+    <h2 data-reveal style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.035em;line-height:1.04;font-size:clamp(1.8rem,3.6vw,3rem);margin:0 0 44px;max-width:760px;">Trusted by partners that <span class="nrd-highlight">scaled</span> with us<span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    <div id="quoteCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px;"></div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="contact" style="position:relative;background:var(--neuroid-yellow);padding:clamp(72px,11vw,160px) clamp(18px,4vw,56px);border-bottom:1.5px solid var(--neuroid-ink);overflow:hidden;">
   <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(circle at center, rgba(12,12,12,0.08) 1.4px, transparent 2px);background-size:24px 24px;pointer-events:none;"></div>
   <div data-reveal style="position:relative;max-width:1000px;margin:0 auto;text-align:center;">
-    <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.98;font-size:clamp(2.4rem,6.4vw,5.4rem);margin:0;text-wrap:balance;">Want work like <span style="font-family:var(--font-serif);font-style:italic;font-weight:400;">this</span>?<span style="display:inline-block;width:0.15em;height:0.15em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.04em;"></span></h2>
-    <p style="font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.5;max-width:660px;margin:26px auto 0;">A creative engine that ships volume and actually performs - plugged into the media that scales it.</p>
-    <div style="display:flex;justify-content:center;margin-top:38px;">
-      <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;">
-        <span class="nrd-btn nrd-btn--inverse nrd-btn--block nrd-btn--lg">Book a Growth Audit</span>
-      </a>
+    <h2 style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.98;font-size:clamp(2.6rem,7vw,6rem);margin:0;text-wrap:balance;">Let's create something <span style="font-family:var(--font-serif);font-style:italic;font-weight:400;">great</span><span style="display:inline-block;width:0.16em;height:0.16em;background:var(--neuroid-red);vertical-align:baseline;margin-left:0.05em;border-radius:0;"></span></h2>
+    <p style="font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.5;max-width:680px;margin:28px auto 0;">Whether you've hit a ceiling or you need a creative engine that delivers - let's find your edge.</p>
+    <div style="display:flex;justify-content:center;margin-top:40px;">
+      <a href="mailto:hello@neuroidmedia.com" style="text-decoration:none;"><span class="nrd-btn nrd-btn--inverse nrd-btn--block nrd-btn--lg">Book a Growth Audit</span></a>
     </div>
-    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;margin-top:30px;">New Delhi, India · hello@neuroidmedia.com</div>
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;margin-top:32px;">New Delhi, India · hello@neuroidmedia.com</div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer style="background:var(--neuroid-ink);color:var(--neuroid-paper);padding:clamp(56px,7vw,88px) clamp(18px,4vw,56px) 40px;">
-  <div style="max-width:1320px;margin:0 auto;">
+  <div style="max-width:1280px;margin:0 auto;">
     <div style="display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;">
       <div style="flex:1 1 320px;min-width:260px;">
         <img src="assets/brand/neuroid-logo.svg" alt="Neuroid" style="height:30px;margin-bottom:20px;">
@@ -172,17 +571,22 @@
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:48px;">
         <div>
-          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Explore</div>
-          <a href="#" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Home</a>
-          <a href="#work" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Work</a>
-          <a href="#" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Services</a>
-          <a href="#" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">About</a>
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Services</div>
+          <a href="#services" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Performance Marketing</a>
+          <a href="#services" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Performance Creatives</a>
+          <a href="#services" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Socials &amp; IPs</a>
+          <a href="#services" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">CRO &amp; Retention</a>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Company</div>
+          <a href="/portfolio" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Work</a>
+          <a href="#about" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">About</a>
+          <a href="#contact" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Contact</a>
         </div>
         <div>
           <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-bottom:16px;">Connect</div>
           <a href="https://instagram.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Instagram</a>
           <a href="https://linkedin.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">LinkedIn</a>
-          <a href="mailto:hello@neuroidmedia.com" style="display:block;text-decoration:none;color:#fff;font-size:14px;padding:6px 0;">Email</a>
         </div>
       </div>
     </div>
@@ -195,315 +599,378 @@
 
 </div>
 
-<!-- Lightbox mount -->
-<div id="lightbox"></div>
-
 <script>
 (function () {
   "use strict";
-  var INK = 'var(--neuroid-ink)', YEL = 'var(--neuroid-yellow)';
+  var INK = 'var(--neuroid-ink)', YEL = 'var(--neuroid-yellow)', RED = 'var(--neuroid-red)',
+      PAPER = 'var(--neuroid-paper)', GREY = 'var(--neuroid-grey)';
+  var CL = 'https://res.cloudinary.com/dbuklvo6b/video/upload/f_auto,q_auto,w_480/';
 
-  /* ---------- Data ---------- */
-  function items() {
-    var CL = 'https://res.cloudinary.com/dbuklvo6b/video/upload/f_auto,q_auto,w_480/';
-    var Vraw = [
-      ['v1782199889/UGC_6___PUW_2___Hook_3_tnnhke', 'Period Underwear', 'ugc'],
-      ['v1782043217/UNO_Luxe_V2_lefbae', 'UNO Luxe', 'film'],
-      ['v1782042891/Yoho_Pitstop_H1_V2_3_jdlfvv', 'Yoho', 'perf'],
-      ['v1782042845/H1_CupJi_V1_3_nb1jzu', 'Cup Ji', 'ugc'],
-      ['v1782042844/PU_3___Hook_2_1_egyvbl', 'Period Underwear', 'ugc'],
-      ['v1782042843/9X16_V1_r2yjdc', 'Spirit Animal', 'perf'],
-      ['v1782042842/Karassa_UGC_2_2_w1avqf', 'Karassa', 'ugc'],
-      ['v1782042839/Svarn_Jewels_CC146_inm6hs', 'Svarn Jewels', 'perf'],
-      ['v1782042838/CC15_V3_ad3uqu', 'Jewelsmars', 'perf'],
-      ['v1782042836/CC60_FRECKLES_VIDEO_silix5', 'Freckles', 'ugc'],
-      ['v1782042833/Svarn_Jewels_CC140_wkdu2m', 'Svarn Jewels', 'social'],
-      ['v1782042831/CC33_PowerShift_Pants_video_jfrtn6', 'PowerShift', 'perf'],
-      ['v1782042826/Period_Underwear___Hook_2_oc2mad', 'Period Underwear', 'ugc'],
-      ['v1782042826/CC14_Girls_Leggings_V2_l7z8a6', 'Superbottoms', 'perf'],
-      ['v1782042820/CC14_1_smi6hm', 'Superbottoms', 'perf'],
-      ['v1782042817/9x16_V3_bscyvw', 'Lifelong', 'perf'],
-      ['v1782042816/CC5_Final_x5ejpn', 'Kisah', 'film'],
-      ['v1782042815/CC11_Understyling_your_eyes_npetnn', 'Huesfab', 'social'],
-      ['v1782042814/CC101_Bedtime_Supremacy_ptdoos', 'Silverfied', 'social'],
-      ['v1782042812/CC115_Bestseller_Rings_ajsz9s', 'Jewelsmars', 'perf'],
-      ['v1782042807/CC60_Silverfied_Screen_Freeze_Product_final_lmtvvo', 'Silverfied', 'social'],
-      ['v1782042806/CC67_Silverfied_Stack_you_forget_to_take_off_fkuonn', 'Silverfied', 'social'],
-      ['v1782042805/CC56_silvercied_Msgs_in_DM_Final_srazws', 'Silverfied', 'social'],
-      ['v1782042799/Sequence_01_1_f4rpm7', 'Wooden Street', 'film'],
-      ['v1782042791/CC27_Huesfab_All_collection_Final_vi2rjm', 'Huesfab', 'social'],
-      ['v1782042790/PU_02_May_H2.wav_1_lvicth', 'Period Underwear', 'ugc'],
-      ['v1782042780/CC12_ceratine_Final_svatid', 'Ceratine', 'perf'],
-      ['v1782042777/Polo_Gif_ybhdjd', 'Mackly', 'social'],
-      ['v1782042777/9x16_cova4q', 'Vaaree', 'perf'],
-      ['v1782042774/CC3___Hard_Launch_-_Short_Kurta_oxl7wu', 'Kisah', 'film']
-    ];
-    var V = Vraw.map(function (r) { return { type: 'video', src: CL + r[0] + '.mp4', brand: r[1], cat: r[2] }; });
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-    var Sraw = [
-      ['c01.png', 'Wooden Street'], ['c02.png', 'Jewelsmars'], ['c03.png', 'Lifelong'],
-      ['c04.png', 'Silverfied'], ['c05.png', 'Kisah'], ['c06.png', 'Yoho'],
-      ['c07.png', 'Superbottoms'], ['c08.png', 'Huesfab'], ['c09.png', 'Vaaree'],
-      ['c10.jpg', 'Mackly'], ['c11.jpg', 'Nourish You'], ['c12.jpg', 'Spirit Animal'],
-      ['c13.jpg', 'Awenest'], ['c14.jpg', 'Ghani Putri'], ['c15.jpg', 'Loving Crafts'],
-      ['c16.jpg', 'Chowkhat'], ['c17.jpg', 'Supersox'], ['c18.jpg', 'Vedansh'],
-      ['c19.jpg', 'Jaipuri Crown'], ['c20.jpg', 'Gataca'], ['c21.jpg', 'Truth & Hair'],
-      ['c22.png', 'Deep Impact'], ['c23.png', 'Evara'], ['c24.jpg', 'Wooden Street'],
-      ['c25.jpg', 'Jewelsmars'], ['c26.jpg', 'Lifelong']
-    ];
-    var statics = Sraw.map(function (r) { return { type: 'img', src: 'assets/creatives/' + r[0].replace(/\.(png|jpg|jpeg)$/i, '.webp'), brand: r[1], cat: 'static' }; });
-
-    // Interleave videos and statics for a lively, mixed wall
-    var out = [];
-    var n = Math.max(V.length, statics.length);
-    for (var i = 0; i < n; i++) {
-      if (i < V.length) out.push(V[i]);
-      if (i % 2 === 1 && (i >> 1) < statics.length) out.push(statics[i >> 1]);
-    }
-    statics.forEach(function (s, i) { if (i % 2 === 0) out.push(s); });
-    return out;
-  }
-
-  /* ---------- Video visibility play/pause loop ---------- */
-  var _vids = new Set();
-  var _visTimer = null;
-  function registerVideo(el) {
-    _vids.add(el);
-    if (!_visTimer) {
+  /* ---------- Video visibility (play only on-screen) ---------- */
+  var _vids = [], _timer = null;
+  function registerVideo(v) {
+    _vids.push(v);
+    if (!_timer) {
       var tick = function () {
         var vh = window.innerHeight, vw = window.innerWidth;
-        _vids.forEach(function (v) {
-          if (!v.isConnected) { _vids.delete(v); return; }
-          var r = v.getBoundingClientRect();
+        for (var i = _vids.length - 1; i >= 0; i--) {
+          var x = _vids[i];
+          if (!x.isConnected) { _vids.splice(i, 1); continue; }
+          var r = x.getBoundingClientRect();
           var on = r.bottom > -80 && r.top < vh + 80 && r.right > 0 && r.left < vw;
-          if (on) { if (v.paused) v.play().catch(function () {}); }
-          else if (!v.paused) v.pause();
-        });
+          if (on) { if (x.paused) x.play().catch(function () {}); }
+          else if (!x.paused) x.pause();
+        }
       };
-      _visTimer = setInterval(tick, 450);
+      _timer = setInterval(tick, 450);
       setTimeout(tick, 60);
     }
   }
 
-  /* ---------- Gallery ---------- */
-  function buildGallery() {
-    var its = items();
-    var grid = document.getElementById('galleryTiles');
-    document.getElementById('resultCount').textContent = its.length + ' creatives';
+  /* ---------- Hero gallery (3 auto-scrolling columns of mixed video + stills) ---------- */
+  function buildHeroGallery() {
+    var grid = document.getElementById('heroGallery');
+    if (!grid) return;
+    var VIDEOS = [
+      'v1782199889/UGC_6___PUW_2___Hook_3_tnnhke',
+      'v1782043217/UNO_Luxe_V2_lefbae', 'v1782042891/Yoho_Pitstop_H1_V2_3_jdlfvv',
+      'v1782042845/H1_CupJi_V1_3_nb1jzu', 'v1782042844/PU_3___Hook_2_1_egyvbl',
+      'v1782042843/9X16_V1_r2yjdc', 'v1782042842/Karassa_UGC_2_2_w1avqf',
+      'v1782042839/Svarn_Jewels_CC146_inm6hs', 'v1782042838/CC15_V3_ad3uqu',
+      'v1782042836/CC60_FRECKLES_VIDEO_silix5', 'v1782042833/Svarn_Jewels_CC140_wkdu2m',
+      'v1782042831/CC33_PowerShift_Pants_video_jfrtn6', 'v1782042826/Period_Underwear___Hook_2_oc2mad',
+      'v1782042826/CC14_Girls_Leggings_V2_l7z8a6', 'v1782042820/CC14_1_smi6hm',
+      'v1782042817/9x16_V3_bscyvw', 'v1782042816/CC5_Final_x5ejpn',
+      'v1782042815/CC11_Understyling_your_eyes_npetnn', 'v1782042814/CC101_Bedtime_Supremacy_ptdoos',
+      'v1782042812/CC115_Bestseller_Rings_ajsz9s', 'v1782042807/CC60_Silverfied_Screen_Freeze_Product_final_lmtvvo',
+      'v1782042806/CC67_Silverfied_Stack_you_forget_to_take_off_fkuonn', 'v1782042805/CC56_silvercied_Msgs_in_DM_Final_srazws',
+      'v1782042799/Sequence_01_1_f4rpm7', 'v1782042791/CC27_Huesfab_All_collection_Final_vi2rjm',
+      'v1782042790/PU_02_May_H2.wav_1_lvicth', 'v1782042780/CC12_ceratine_Final_svatid',
+      'v1782042777/Polo_Gif_ybhdjd', 'v1782042777/9x16_cova4q',
+      'v1782042774/CC3___Hard_Launch_-_Short_Kurta_oxl7wu'
+    ].map(function (p) { return { video: CL + p + '.mp4' }; });
+    var STATICS = ['c01','c02','c03','c04','c05','c06','c07','c08','c09','c10','c11','c12','c13',
+      'c14','c15','c16','c17','c18','c19','c20','c21','c22','c23','c24','c25','c26']
+      .map(function (f) { return { img: 'assets/creatives/' + f + '.webp' }; });
 
-    its.forEach(function (it, i) {
-      var tile = document.createElement('div');
-      tile.style.cssText = 'position:relative;aspect-ratio:9 / 16;overflow:hidden;border:1.5px solid ' + INK +
-        ';background:' + INK + ';cursor:pointer;transition:transform .22s var(--ease-snap), box-shadow .22s var(--ease-snap);box-shadow:0 0 0 0 ' + YEL + ';';
-
-      var media;
-      if (it.type === 'video') {
-        media = document.createElement('video');
-        media.src = it.src; media.loop = true; media.playsInline = true; media.preload = 'none';
-        media.muted = true; media.defaultMuted = true; media.setAttribute('muted', '');
-        media.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:' + INK + ';';
-        registerVideo(media);
-      } else {
-        media = document.createElement('img');
-        media.src = it.src; media.loading = 'lazy'; media.alt = it.brand;
-        media.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:rgba(12,12,12,0.05);';
-      }
-
-      var chip = document.createElement('div');
-      chip.textContent = it.type === 'video' ? 'Video' : 'Still';
-      chip.style.cssText = 'position:absolute;top:10px;left:10px;z-index:3;font-family:var(--font-mono);font-size:9px;font-weight:700;' +
-        'letter-spacing:0.1em;text-transform:uppercase;color:' + INK + ';background:' + (it.type === 'video' ? YEL : '#fff') +
-        ';border:1px solid ' + INK + ';padding:3px 6px;line-height:1;pointer-events:none;';
-
-      var overlay = document.createElement('div');
-      overlay.setAttribute('data-ov', '');
-      overlay.style.cssText = 'position:absolute;inset:0;display:flex;align-items:flex-end;padding:13px;' +
-        'background:linear-gradient(to top, rgba(12,12,12,0.72) 0%, rgba(12,12,12,0.0) 52%);opacity:0;transition:opacity .22s ease;z-index:2;pointer-events:none;';
-      overlay.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-sans);font-weight:700;font-size:13px;letter-spacing:-0.01em;color:#fff;">View<span style="font-size:15px;line-height:1;">↗</span></span>';
-
-      tile.appendChild(media);
-      tile.appendChild(chip);
-      tile.appendChild(overlay);
-
-      tile.addEventListener('mouseenter', function () {
-        tile.style.transform = 'translate(-3px,-3px)';
-        tile.style.boxShadow = '7px 7px 0 0 ' + YEL;
-        overlay.style.opacity = '1';
-      });
-      tile.addEventListener('mouseleave', function () {
-        tile.style.transform = 'none';
-        tile.style.boxShadow = '0 0 0 0 ' + YEL;
-        overlay.style.opacity = '0';
-      });
-      tile.addEventListener('click', function () { openLightbox(it); });
-
-      grid.appendChild(tile);
-    });
-  }
-
-  /* ---------- Stat strip ---------- */
-  function buildStats() {
-    var stats = [
-      ['200+', 'Creatives / month'],
-      ['100+', 'D2C brands'],
-      ['7.5x', 'Peak ROAS'],
-      ['₹450Cr+', 'Revenue influenced']
+    var M = [], n = Math.max(VIDEOS.length, STATICS.length);
+    for (var i = 0; i < n; i++) {
+      if (i < VIDEOS.length) M.push(VIDEOS[i]);
+      if (i < STATICS.length) M.push(STATICS[i]);
+    }
+    var AR = ['3/4', '1/1', '4/5', '3/4', '4/5', '1/1', '3/4', '4/5', '1/1'];
+    var ANIMS = [
+      { anim: 'nrd-rise-up', dur: '52s' },
+      { anim: 'nrd-rise-down', dur: '64s' },
+      { anim: 'nrd-rise-up', dur: '58s' }
     ];
-    var wrap = document.getElementById('statCells');
-    stats.forEach(function (s) {
-      var cell = document.createElement('div');
-      cell.style.cssText = 'padding:clamp(22px,3vw,34px) clamp(18px,2.4vw,32px);border-right:1px solid rgba(255,255,255,0.16);border-bottom:1px solid rgba(255,255,255,0.16);';
-      var num = document.createElement('div');
-      num.textContent = s[0];
-      num.style.cssText = 'font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:1;font-size:clamp(2rem,4vw,3.1rem);color:var(--neuroid-yellow);';
-      var lab = document.createElement('div');
-      lab.textContent = s[1];
-      lab.style.cssText = 'font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--neuroid-grey-dark);margin-top:10px;';
-      cell.appendChild(num); cell.appendChild(lab);
-      wrap.appendChild(cell);
+    var cols = [[], [], []];
+    M.forEach(function (m, i) { cols[i % 3].push(m); });
+
+    cols.forEach(function (items, ci) {
+      var col = document.createElement('div');
+      col.style.cssText = 'display:flex;flex-direction:column;gap:14px;will-change:transform;animation:' +
+        ANIMS[ci].anim + ' ' + ANIMS[ci].dur + ' linear infinite;';
+      // two identical sets for a seamless loop
+      for (var pass = 0; pass < 2; pass++) {
+        items.forEach(function (m, i) {
+          var ar = AR[i % AR.length];
+          var tile = document.createElement('div');
+          tile.style.cssText = 'border-radius:14px;overflow:hidden;border:1px solid ' + INK +
+            ';box-shadow:0 6px 18px rgba(12,12,12,0.16);background:rgba(12,12,12,0.05);';
+          if (pass === 1) tile.setAttribute('aria-hidden', 'true');
+          var media;
+          if (m.video) {
+            media = document.createElement('video');
+            media.src = m.video; media.loop = true; media.playsInline = true; media.preload = 'none';
+            media.muted = true; media.defaultMuted = true; media.setAttribute('muted', '');
+            media.style.cssText = 'display:block;width:100%;aspect-ratio:' + ar + ';object-fit:cover;background:' + INK + ';';
+            registerVideo(media);
+          } else {
+            media = document.createElement('img');
+            media.src = m.img; media.loading = 'lazy'; media.decoding = 'async'; media.alt = '';
+            media.style.cssText = 'display:block;width:100%;aspect-ratio:' + ar + ';object-fit:cover;';
+          }
+          tile.appendChild(media);
+          col.appendChild(tile);
+        });
+      }
+      grid.appendChild(col);
     });
   }
 
-  /* ---------- Logo marquee rows ---------- */
-  function makeCell(b) {
-    var cell = document.createElement('div');
-    cell.style.cssText = 'flex:none;width:180px;height:84px;margin-right:16px;display:flex;align-items:center;justify-content:center;' +
-      'padding:16px 26px;border:1px solid var(--neuroid-ink);background:var(--neuroid-paper);' +
-      'transition:background .22s var(--ease-snap), box-shadow .22s var(--ease-snap), transform .22s var(--ease-snap);';
-    var img = document.createElement('img');
-    img.src = 'assets/logos/' + b[1].replace(/\.png$/i, '.webp'); img.alt = b[0]; img.loading = 'lazy';
-    img.style.cssText = 'max-width:100%;max-height:38px;width:auto;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1);opacity:0.82;' +
-      'transition:filter .22s var(--ease-snap), opacity .22s var(--ease-snap);';
-    cell.appendChild(img);
-    cell.addEventListener('mouseenter', function () {
-      cell.style.background = 'var(--neuroid-yellow)';
-      cell.style.boxShadow = '3px 3px 0 0 var(--neuroid-ink)';
-      cell.style.transform = 'translate(-1px,-1px)';
-      img.style.filter = 'none'; img.style.opacity = '1';
-    });
-    cell.addEventListener('mouseleave', function () {
-      cell.style.background = 'var(--neuroid-paper)';
-      cell.style.boxShadow = 'none';
-      cell.style.transform = 'none';
-      img.style.filter = 'grayscale(1)'; img.style.opacity = '0.82';
-    });
-    return cell;
-  }
-  function buildLogoRow(mountId, brands, reverse, dur) {
+  /* ---------- Proof ribbons (marquee) ---------- */
+  function buildRibbon(mountId, items, opts) {
+    var mount = document.getElementById(mountId);
+    if (!mount) return;
     var track = document.createElement('div');
     track.style.cssText = 'display:flex;width:max-content;will-change:transform;animation:' +
-      (reverse ? 'nrd-marquee-rev' : 'nrd-marquee') + ' ' + dur + ' linear infinite;';
-    [false, true].forEach(function (isClone) {
+      (opts.reverse ? 'nrd-marquee-rev' : 'nrd-marquee') + ' 26s linear infinite;';
+    function makeSet() {
+      var set = document.createElement('div');
+      set.style.cssText = 'display:flex;align-items:center;flex:none;';
+      items.forEach(function (it) {
+        var stat = document.createElement('div');
+        stat.style.cssText = 'display:flex;align-items:baseline;gap:10px;padding:10px 28px;';
+        stat.innerHTML = '<span style="font-family:var(--font-sans);font-weight:700;font-size:clamp(18px,1.9vw,26px);letter-spacing:-0.03em;color:' + opts.numColor + ';">' + esc(it[0]) + '</span>' +
+          '<span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:' + opts.labelColor + ';opacity:' + opts.labelOpacity + ';">' + esc(it[1]) + '</span>';
+        set.appendChild(stat);
+        var dot = document.createElement('span');
+        dot.style.cssText = 'width:7px;height:7px;background:' + RED + ';align-self:center;flex:none;';
+        set.appendChild(dot);
+      });
+      return set;
+    }
+    track.appendChild(makeSet());
+    track.appendChild(makeSet());
+    mount.appendChild(track);
+  }
+
+  /* ---------- Logo rows (marquee) ---------- */
+  function buildLogoRow(mountId, brands, opts) {
+    var mount = document.getElementById(mountId);
+    if (!mount) return;
+    var track = document.createElement('div');
+    track.style.cssText = 'display:flex;width:max-content;will-change:transform;animation:' +
+      (opts.reverse ? 'nrd-marquee-rev' : 'nrd-marquee') + ' ' + opts.dur + ' linear infinite;';
+    function makeSet(hidden) {
       var set = document.createElement('div');
       set.style.cssText = 'display:flex;flex:none;';
-      if (isClone) set.setAttribute('aria-hidden', 'true');
-      brands.forEach(function (b) { set.appendChild(makeCell(b)); });
-      track.appendChild(set);
-    });
-    document.getElementById(mountId).appendChild(track);
-  }
-
-  /* ---------- Lightbox ---------- */
-  var lbMount = document.getElementById('lightbox');
-  function openLightbox(it) {
-    closeLightbox();
-    var overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(8,8,8,0.86);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);' +
-      'display:flex;align-items:center;justify-content:center;padding:clamp(28px,5vw,72px) clamp(18px,4vw,56px);';
-    overlay.addEventListener('click', closeLightbox);
-
-    var frame = document.createElement('div');
-    frame.style.cssText = 'position:relative;border:1.5px solid ' + INK + ';box-shadow:0 18px 50px rgba(0,0,0,0.5);line-height:0;animation:nrd-pop .22s var(--ease-snap);';
-    frame.addEventListener('click', function (e) { e.stopPropagation(); });
-
-    var media;
-    if (it.type === 'video') {
-      media = document.createElement('video');
-      media.src = it.src.replace('w_480', 'w_900');
-      media.loop = true; media.controls = true; media.autoplay = true; media.playsInline = true;
-      media.style.cssText = 'display:block;width:auto;height:auto;max-width:100%;max-height:min(86vh,820px);aspect-ratio:9 / 16;object-fit:cover;background:' + INK + ';';
-      media.muted = false; media.volume = 1;
-      media.play().catch(function () { media.muted = true; media.play().catch(function () {}); });
-    } else {
-      media = document.createElement('img');
-      media.src = it.src; media.alt = it.brand;
-      media.style.cssText = 'display:block;width:auto;height:auto;max-width:100%;max-height:min(86vh,820px);object-fit:contain;background:' + INK + ';';
+      if (hidden) set.setAttribute('aria-hidden', 'true');
+      brands.forEach(function (b) {
+        var cell = document.createElement('div');
+        cell.className = 'logo-cell';
+        var img = document.createElement('img');
+        img.src = 'assets/logos/' + b[1].replace(/\.png$/i, '.webp');
+        img.alt = b[0]; img.loading = 'lazy';
+        cell.appendChild(img);
+        set.appendChild(cell);
+      });
+      return set;
     }
-
-    var closeBtn = document.createElement('button');
-    closeBtn.type = 'button'; closeBtn.setAttribute('aria-label', 'Close');
-    closeBtn.style.cssText = 'position:absolute;top:-13px;right:-13px;width:42px;height:42px;cursor:pointer;background:' + YEL +
-      ';border:1.5px solid ' + INK + ';box-shadow:3px 3px 0 0 ' + INK + ';display:flex;align-items:center;justify-content:center;padding:0;z-index:2;';
-    closeBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="' + '#0C0C0C' + '" stroke-width="2" stroke-linecap="square"/></svg>';
-    closeBtn.addEventListener('click', closeLightbox);
-
-    var caption = document.createElement('div');
-    caption.style.cssText = 'position:absolute;left:0;bottom:-44px;display:flex;align-items:center;gap:10px;';
-    var tag = document.createElement('span');
-    tag.textContent = it.type === 'video' ? 'Video creative' : 'Still creative';
-    tag.style.cssText = 'font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:' + INK +
-      ';background:' + (it.type === 'video' ? YEL : '#fff') + ';border:1px solid ' + INK + ';padding:4px 8px;line-height:1;';
-    caption.appendChild(tag);
-
-    frame.appendChild(media);
-    frame.appendChild(closeBtn);
-    frame.appendChild(caption);
-    overlay.appendChild(frame);
-    lbMount.appendChild(overlay);
-    document.body.style.overflow = 'hidden';
+    track.appendChild(makeSet(false));
+    track.appendChild(makeSet(true));
+    mount.appendChild(track);
   }
-  function closeLightbox() {
-    if (lbMount.firstChild) lbMount.innerHTML = '';
-    document.body.style.overflow = '';
-  }
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeLightbox();
-  });
 
-  /* ---------- Reveal on scroll ---------- */
-  function initReveal() {
-    var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
-    var show = function (el) { el.style.opacity = '1'; el.style.transform = 'none'; };
-    if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
-    els.forEach(function (el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)';
+  /* ---------- Loop nodes (desktop) ---------- */
+  function buildLoopNodes() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-loopnode]'), function (host) {
+      var parts = host.getAttribute('data-loopnode').split('|');
+      var card = document.createElement('div');
+      card.style.cssText = 'position:relative;background:' + PAPER + ';border:1.5px solid ' + INK +
+        ';box-shadow:5px 5px 0 0 ' + YEL + ';padding:15px 16px 16px;text-align:left;transition:transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1);';
+      card.onmouseenter = function () { card.style.transform = 'translate(-2px,-2px)'; card.style.boxShadow = '8px 8px 0 0 ' + YEL; };
+      card.onmouseleave = function () { card.style.transform = 'none'; card.style.boxShadow = '5px 5px 0 0 ' + YEL; };
+      card.innerHTML = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">' +
+        '<span style="width:30px;height:30px;flex:none;background:' + YEL + ';border:1.5px solid ' + INK + ';display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:-0.02em;color:' + INK + ';">' + esc(parts[0]) + '</span>' +
+        '<span style="font-family:var(--font-sans);font-weight:700;font-size:15px;letter-spacing:-0.02em;color:' + INK + ';line-height:1.1;">' + esc(parts[1]) + '</span></div>' +
+        '<div style="font-size:12px;line-height:1.4;color:' + GREY + ';">' + esc(parts[2]) + '</div>';
+      host.appendChild(card);
     });
-    var io = new IntersectionObserver(function (ents) {
-      ents.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-    els.forEach(function (el) { io.observe(el); });
-    setTimeout(function () { els.forEach(show); }, 2400);
+  }
+
+  /* ---------- Loop vertical (mobile) ---------- */
+  function buildLoopVertical() {
+    var mount = document.getElementById('loopVertical');
+    if (!mount) return;
+    var steps = [
+      ['01', 'Ship', 'Put creative and media live, fast.'],
+      ['02', 'Read the signal', 'Separate signal from noise in the data.'],
+      ['03', 'Sharpen', 'Cut what fails, double down on what works.'],
+      ['04', 'Scale', 'Compound the winners profitably.']
+    ];
+    var html = '';
+    steps.forEach(function (s, i) {
+      html += '<div style="background:' + PAPER + ';border:1.5px solid ' + INK + ';box-shadow:4px 4px 0 0 ' + YEL + ';padding:16px 18px;">' +
+        '<div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:' + RED + ';font-weight:700;">' + s[0] + '</div>' +
+        '<div style="font-family:var(--font-sans);font-weight:700;font-size:17px;color:' + INK + ';margin:4px 0 3px;">' + esc(s[1]) + '</div>' +
+        '<div style="font-size:13px;line-height:1.45;color:' + GREY + ';">' + esc(s[2]) + '</div></div>' +
+        '<div style="text-align:center;color:' + YEL + ';font-size:22px;padding:8px 0;">' + (i < 3 ? '↓' : '↻') + '</div>';
+    });
+    html += '<div style="text-align:center;font-family:var(--font-sans);font-weight:700;color:#fff;font-size:15px;">Loops back to 01 - one team, no handoff.</div>';
+    mount.innerHTML = html;
+  }
+
+  /* ---------- Work cards (brand-matched creatives) ---------- */
+  function buildWorkCards() {
+    var mount = document.getElementById('workCards');
+    if (!mount) return;
+    // [brand, image, [tags], stat, statLabel, bg, numColor, labelColor]
+    var cards = [
+      ['Wooden Street', 'c01', ['Creative', '+2'], '5x+', 'ROAS at scale', YEL, INK, 'rgba(12,12,12,0.62)'],
+      ['Kisah', 'c05', ['Lifecycle', '+1'], '7x', 'jump in MRR', INK, YEL, 'rgba(255,255,255,0.65)'],
+      ['Jewelsmars', 'c25', ['Performance', '+2'], '207%', 'MRR in 5 months', RED, PAPER, 'rgba(255,255,255,0.78)'],
+      ['Lifelong', 'c03', ['Integrated', '+2'], '7.5x', 'peak ROAS', INK, YEL, 'rgba(255,255,255,0.65)']
+    ];
+    cards.forEach(function (c) {
+      var brand = c[0], img = c[1], tags = c[2], stat = c[3], statLabel = c[4], bg = c[5], numColor = c[6], labelColor = c[7];
+      var wrap = document.createElement('div');
+      wrap.setAttribute('data-reveal', '');
+      var pills = tags.map(function (t) {
+        return '<span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;padding:6px 11px;border-radius:999px;background:rgba(12,12,12,0.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#fff;white-space:nowrap;line-height:1;">' + esc(t) + '</span>';
+      }).join('');
+      wrap.innerHTML =
+        '<a href="/portfolio" style="text-decoration:none;color:inherit;display:block;">' +
+        '<div class="work-card">' +
+          '<img src="assets/creatives/' + img + '.webp" alt="' + esc(brand) + ' creative" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">' +
+          '<div style="position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:4;">' + pills + '</div>' +
+          '<div data-ov style="position:absolute;inset:0;background:' + bg + ';z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;pointer-events:none;">' +
+            '<div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:' + labelColor + ';margin-bottom:4px;">' + esc(statLabel) + '</div>' +
+            '<div style="font-family:var(--font-sans);font-weight:700;letter-spacing:-0.04em;line-height:0.92;font-size:clamp(2.4rem,5vw,3.4rem);color:' + numColor + ';">' + esc(stat) + '</div>' +
+            '<div style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:16px;padding:9px 16px 9px 18px;border-radius:999px;background:' + numColor + ';color:' + bg + ';font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:-0.01em;">View<span style="font-size:16px;line-height:1;">→</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--font-sans);font-weight:700;letter-spacing:-0.02em;font-size:clamp(1.15rem,1.6vw,1.45rem);color:' + INK + ';">' + esc(brand) + '<span style="font-size:1.1em;line-height:1;">→</span></div>' +
+        '</a>';
+      mount.appendChild(wrap);
+    });
+  }
+
+  /* ---------- Comparison table ---------- */
+  function buildCompareRows() {
+    var mount = document.getElementById('compareRows');
+    if (!mount) return;
+    var rows = [
+      ['Creative + performance, one loop', '✓', '—', '—', '—'],
+      ['Owns growth strategy', '✓', '✓', '—', '~'],
+      ['Creative volume at scale', '✓', '—', '✓', '~'],
+      ['Retention & CRO', '✓', '~', '—', '—'],
+      ['Films & brand recall', '✓', '—', '✓', '~'],
+      ['Reliable timelines', '✓', '✓', '~', '—'],
+      ['Feels like your own team', '✓', '—', '—', '—']
+    ];
+    function cell(v) {
+      var color = INK, txt = v;
+      if (v === '—') color = 'rgba(12,12,12,0.32)';
+      if (v === '~') { color = GREY; txt = 'Partial'; }
+      return { color: color, txt: txt };
+    }
+    var html = '';
+    rows.forEach(function (r, i) {
+      var last = i === rows.length - 1;
+      html += '<tr><td style="text-align:left;padding:16px 20px;font-weight:600;font-size:14.5px;border-bottom:' + (last ? 'none' : '1px solid rgba(12,12,12,0.12)') + ';">' + esc(r[0]) + '</td>';
+      for (var c = 1; c <= 4; c++) {
+        var isN = c === 1, cl = cell(r[c]), partial = cl.txt === 'Partial';
+        html += '<td style="text-align:center;padding:16px 14px;border-bottom:' + (last ? 'none' : (isN ? '1px solid rgba(12,12,12,0.18)' : '1px solid rgba(12,12,12,0.12)')) +
+          ';background:' + (isN ? YEL : 'transparent') + ';border-left:' + (isN ? '1.5px solid var(--neuroid-ink)' : 'none') + ';border-right:' + (isN ? '1.5px solid var(--neuroid-ink)' : 'none') +
+          ';font-size:' + (partial ? '11px' : '17px') + ';font-weight:700;font-family:' + (partial ? 'var(--font-mono)' : 'var(--font-sans)') +
+          ';letter-spacing:' + (partial ? '0.1em' : '0') + ';text-transform:' + (partial ? 'uppercase' : 'none') + ';color:' + cl.color + ';">' + esc(cl.txt) + '</td>';
+      }
+      html += '</tr>';
+    });
+    mount.innerHTML = html;
+  }
+
+  /* ---------- Step cards ---------- */
+  function buildStepCards() {
+    var mount = document.getElementById('stepCards');
+    if (!mount) return;
+    var steps = [
+      ['01', 'Deep dive', 'Audit the account, the funnel, the creative - find the leak.'],
+      ['02', 'Hypothesise', 'Form sharp bets on what will move the system.'],
+      ['03', 'Ship', 'Put it live fast - creative and media together.'],
+      ['04', 'Learn & iterate', 'Read the signal, sharpen, compound the wins.']
+    ];
+    steps.forEach(function (s) {
+      var d = document.createElement('div');
+      d.setAttribute('data-reveal', '');
+      d.style.cssText = 'background:' + INK + ';padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;';
+      d.innerHTML = '<div style="font-family:var(--font-mono);font-size:clamp(28px,3vw,40px);font-weight:700;color:' + YEL + ';letter-spacing:-0.02em;line-height:1;">' + s[0] + '</div>' +
+        '<div style="font-family:var(--font-sans);font-weight:700;font-size:clamp(1.1rem,1.7vw,1.4rem);letter-spacing:-0.02em;color:#fff;margin:18px 0 10px;">' + esc(s[1]) + '</div>' +
+        '<div style="font-size:14px;line-height:1.5;color:var(--neuroid-grey-dark);">' + esc(s[2]) + '</div>';
+      mount.appendChild(d);
+    });
+  }
+
+  /* ---------- Testimonials ---------- */
+  function buildQuoteCards() {
+    var mount = document.getElementById('quoteCards');
+    if (!mount) return;
+    var quotes = [
+      ['Neuroid didn’t act like an agency - they acted like our growth team. Creative and media finally moved as one system.', 'Pulkit Tiwari', 'CMO, Wooden Street'],
+      ['They found the leak we’d missed for a year. Within months our ROAS was compounding instead of leaking away.', 'Ishan Kukadia', 'Co-founder, Sylvi'],
+      ['The creative volume is unreal - and every piece is built to perform, not just to look good.', 'Vanshika Jyot', 'Founder, Skiy Beauty']
+    ];
+    quotes.forEach(function (q) {
+      var initials = q[1].split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2);
+      var d = document.createElement('div');
+      d.setAttribute('data-reveal', '');
+      d.className = 'quote-card';
+      d.style.cssText = 'border:1.5px solid ' + INK + ';background:' + PAPER + ';box-shadow:5px 5px 0 0 ' + INK + ';padding:clamp(26px,3vw,34px);display:flex;flex-direction:column;';
+      d.innerHTML = '<div style="font-family:var(--font-serif);font-size:40px;line-height:0.6;color:' + RED + ';height:24px;">“</div>' +
+        '<p style="font-family:var(--font-serif);font-style:italic;font-size:clamp(1.1rem,1.5vw,1.3rem);line-height:1.45;margin:0 0 28px;flex:1;color:' + INK + ';">' + esc(q[0]) + '</p>' +
+        '<div style="display:flex;align-items:center;gap:12px;border-top:1px solid rgba(12,12,12,0.12);padding-top:18px;">' +
+          '<div style="width:38px;height:38px;background:' + YEL + ';border:1.5px solid ' + INK + ';display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;font-size:15px;flex:none;">' + esc(initials) + '</div>' +
+          '<div><div style="font-family:var(--font-sans);font-weight:700;font-size:14px;">' + esc(q[1]) + '</div>' +
+          '<div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:' + GREY + ';margin-top:2px;">' + esc(q[2]) + '</div></div>' +
+        '</div>';
+      mount.appendChild(d);
+    });
   }
 
   /* ---------- Mobile menu ---------- */
   function initMobileMenu() {
-    var menu = document.getElementById('mobileMenu');
-    document.getElementById('hamburger').addEventListener('click', function () {
-      menu.classList.toggle('open');
-    });
-    Array.prototype.slice.call(menu.querySelectorAll('[data-close]')).forEach(function (a) {
+    var btn = document.getElementById('hamburger'), menu = document.getElementById('mobileMenu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () { menu.classList.toggle('open'); });
+    Array.prototype.forEach.call(menu.querySelectorAll('[data-close]'), function (a) {
       a.addEventListener('click', function () { menu.classList.remove('open'); });
     });
   }
 
+  /* ---------- Reveal on scroll ---------- */
+  function initReveal() {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    function show(el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+    if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+    els.forEach(function (el, i) {
+      var d = Math.min((i % 3) * 70, 180);
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1) ' + d + 'ms, transform .7s cubic-bezier(.16,1,.3,1) ' + d + 'ms';
+    });
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { els.forEach(show); }, 2600);
+  }
+
   /* ---------- Boot ---------- */
-  buildStats();
-  buildGallery();
+  buildHeroGallery();
+  buildRibbon('ribbonInk', [
+    ['₹450Cr+', 'revenue influenced'], ['4.2x', 'net blended ROAS'], ['200+', 'creatives / month'],
+    ['236%', 'brand recall'], ['94%', 'client retention']
+  ], { reverse: false, numColor: YEL, labelColor: '#fff', labelOpacity: 0.7 });
+  buildRibbon('ribbonYellow', [
+    ['200+', 'creatives / month'], ['94%', 'client retention'], ['₹450Cr+', 'revenue influenced'],
+    ['236%', 'brand recall'], ['4.2x', 'net blended ROAS']
+  ], { reverse: true, numColor: INK, labelColor: INK, labelOpacity: 0.62 });
   buildLogoRow('logoRowA', [
     ['Wooden Street', 'woodenstreet.png'], ['Lifelong', 'lifelong-k.png'], ['Jewelsmars', 'jewelsmars.png'], ['Silverfied', 'silverfied.png'],
-    ['Spirit Animal', 'spiritanimal.png'], ['Awenest', 'awenest.avif'], ['Truth & Hair', 'truthandhair.png'], ['Deep Impact', 'deepimpact.png'],
-    ['Superbottoms', 'superbottoms.avif'], ['Kisah', 'kisah.avif'], ['Yoho', 'yoho.png']
-  ], false, '50s');
+    ['Spirit Animal', 'spiritanimal.png'], ['Awenest', 'awenest.avif'], ['Truth & Hair', 'truthandhair.png'], ['Deep Impact', 'deepimpact.png']
+  ], { reverse: false, dur: '44s' });
   buildLogoRow('logoRowB', [
-    ['Vaaree', 'vaaree-k.png'], ['Supersox', 'supersox-k.png'], ['Nourish You', 'nourishyou.png'], ['Evara', 'evara.svg'],
-    ['Mackly', 'mackly.avif'], ['Vedansh', 'vedansh-k.png'], ['Chowkhat', 'chowkhat.avif'], ['Jaipuri Crown', 'jaipuricrown.png'],
+    ['Superbottoms', 'superbottoms.avif'], ['Kisah', 'kisah.avif'], ['Yoho', 'yoho.png'], ['Jaipuri Crown', 'jaipuricrown.png'],
     ['Ghani Putri', 'ghaniputri.png'], ['Gataca', 'gataca.png'], ['Loving Crafts', 'lovingcrafts.avif']
-  ], true, '62s');
+  ], { reverse: true, dur: '57s' });
+  buildLogoRow('logoRowC', [
+    ['Vaaree', 'vaaree-k.png'], ['Supersox', 'supersox-k.png'], ['Nourish You', 'nourishyou.png'], ['Evara', 'evara.svg'],
+    ['Mackly', 'mackly.avif'], ['Vedansh', 'vedansh-k.png'], ['Chowkhat', 'chowkhat.avif']
+  ], { reverse: false, dur: '50s' });
+  buildLoopNodes();
+  buildLoopVertical();
+  buildWorkCards();
+  buildCompareRows();
+  buildStepCards();
+  buildQuoteCards();
   initMobileMenu();
-  requestAnimationFrame(initReveal);
+  initReveal();
 })();
 </script>
+
 </body>
 </html>
