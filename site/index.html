@@ -6,6 +6,10 @@
 <title>Portfolio — Neuroid</title>
 <meta name="description" content="A wall of work that actually performed. Hundreds of scroll-stopping creatives — performance video, UGC, social and ad films — built for D2C brands by Neuroid.">
 
+<!-- Speed: warm up the Cloudinary video CDN before the wall needs it -->
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="dns-prefetch" href="https://res.cloudinary.com">
+
 <!-- Neuroid design system: tokens (fonts, colors, type, spacing, effects, base) -->
 <link rel="stylesheet" href="_ds/neuroid-2-0-visual-identity-257bac54-27b9-4b29-ae4f-f60a1c65bb4f/styles.css">
 
@@ -246,7 +250,7 @@
       ['c22.png', 'Deep Impact'], ['c23.png', 'Evara'], ['c24.jpg', 'Wooden Street'],
       ['c25.jpg', 'Jewelsmars'], ['c26.jpg', 'Lifelong']
     ];
-    var statics = Sraw.map(function (r) { return { type: 'img', src: 'assets/creatives/' + r[0], brand: r[1], cat: 'static' }; });
+    var statics = Sraw.map(function (r) { return { type: 'img', src: 'assets/creatives/' + r[0].replace(/\.(png|jpg|jpeg)$/i, '.webp'), brand: r[1], cat: 'static' }; });
 
     // Interleave videos and statics for a lively, mixed wall
     var out = [];
@@ -366,7 +370,7 @@
       'padding:16px 26px;border:1px solid var(--neuroid-ink);background:var(--neuroid-paper);' +
       'transition:background .22s var(--ease-snap), box-shadow .22s var(--ease-snap), transform .22s var(--ease-snap);';
     var img = document.createElement('img');
-    img.src = 'assets/logos/' + b[1]; img.alt = b[0]; img.loading = 'lazy';
+    img.src = 'assets/logos/' + b[1].replace(/\.png$/i, '.webp'); img.alt = b[0]; img.loading = 'lazy';
     img.style.cssText = 'max-width:100%;max-height:38px;width:auto;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1);opacity:0.82;' +
       'transition:filter .22s var(--ease-snap), opacity .22s var(--ease-snap);';
     cell.appendChild(img);
